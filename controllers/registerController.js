@@ -1,12 +1,6 @@
 import User from "../models/user.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: "30d"
-    });
-};
+
 
 const registerUser = async (req, res) => {
     try {
@@ -38,4 +32,8 @@ const registerUser = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD:controllers/authController.js
 export { registerUser,loginUser};
+=======
+export default registerUser;
+>>>>>>> 93e755fbf2a8fab6b63a7161f98a8e50d8747d41:controllers/registerController.js
