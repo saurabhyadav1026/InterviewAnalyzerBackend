@@ -71,7 +71,7 @@ export const updateQues = async(req,res)=>{
         message: err.message,
       });
     }
-  }
+}
 
 
 
