@@ -1,0 +1,44 @@
+const mongoose = require("mongoose")
+
+const questionSchema = mongoose.Schema({
+    questionId : Number,
+
+    question:{
+        type: String,
+        required: true
+    },
+    questionImage:{
+        type:String
+    },
+
+    questionsImage:{
+        type: String
+    },
+
+    options:[{
+        type:String,
+        required: true
+    }],
+
+    answer:{
+        type: String,
+        required: true
+    },
+
+    topic:{
+        type: String,
+        required: String
+    },
+
+    subjectId:{
+        type: Number,
+        required: true
+    },
+
+    about:{
+        type: String
+    }
+})
+
+
+module.exports = mongoose.model("Question",questionSchema)
