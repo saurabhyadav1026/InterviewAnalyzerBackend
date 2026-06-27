@@ -71,7 +71,40 @@ export const updateQues = async(req,res)=>{
         message: err.message,
       });
     }
-  }
+}
+
+
+export const deleteQues = async(req,res) => {
+    try {
+      const mcq =
+        await MCQ.findById(
+          req.params.id
+        );
+
+      if (!mcq) {
+        return res.status(404).json({
+          message:
+            "MCQ not found",
+        });
+      }
+
+      await MCQ.findByIdAndDelete(
+        req.params.id
+      );
+
+      res.json({
+        message:
+          "MCQ deleted successfully",
+      });
+    } catch (err) {
+      console.log(err);
+
+      res.status(500).json({
+        message: err.message,
+      });
+    }
+}
+
 
 
 

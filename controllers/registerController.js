@@ -32,4 +32,8 @@ const registerUser = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD:controllers/authController.js
+export { registerUser,loginUser};
+=======
 export default registerUser;
+>>>>>>> 93e755fbf2a8fab6b63a7161f98a8e50d8747d41:controllers/registerController.js
