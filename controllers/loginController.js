@@ -1,6 +1,12 @@
-import User from "../models/user";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
-
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: "30d"
+    });
+};
 
 const loginUser = async (req, res) => {
     try {
