@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const questionSchema = mongoose.Schema({
-    questionId : Number,
 
     question:{
         type: String,
@@ -27,7 +26,7 @@ const questionSchema = mongoose.Schema({
     },
 
     subjectId:{
-        type: Number,
+        type: String,
         required: true
     },
 
