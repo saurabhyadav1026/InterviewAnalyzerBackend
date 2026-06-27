@@ -1,8 +1,7 @@
-import Question from '../models/questionModel.js'
-
-export const addMCQ = async (req, res) => {
+import Question from '../../models/Question.js'
+export const addQuestion = async (req, res) => {
   try {
-    const { questionId, question, options, answer, topic, subjectId, about } = req.body;
+    const { question, options, answer, topic, subjectId, about="" } = req.body;
 
     if (!question) {
       return res.status(400).json({
@@ -11,7 +10,6 @@ export const addMCQ = async (req, res) => {
     }
 
     await Question.create({
-      questionId,
       question,
       options,
       answer,
@@ -31,26 +29,23 @@ export const addMCQ = async (req, res) => {
   }
 };
 
-export const updateQues = async(req,res)=>{
+export const updateQuestion = async(req,res)=>{
     try {
       const updatedMCQ =
         await MCQ.findByIdAndUpdate(
-          req.params.id,
-          {
-            subject:
+          req.params._id,
+         { $set:{
+            subjectId:
               req.body.subject,
             question:
               req.body.question,
-            options:
-              req.body.options,
+            options:  req.body.options,
             answer:
               req.body.answer,
             explanation:
               req.body.explanation,
-          },
-          {
-            new: true,
-          }
+          }},
+          
         );
 
       if (!updatedMCQ) {

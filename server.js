@@ -1,11 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js";
 import v1Route from "./routes/v1Route.js";
-import dbconnect from "./config/db.js";
+import v1AdminRoute from "./routes/v1AdminRoute.js";
 
 const app = express();
 
@@ -19,10 +17,11 @@ try {
     console.log("Using fallback mongo connection");
 }
 
-
-
-app.use("/api/auth", authRoutes);
 app.use("/api/v1", v1Route);
+app.use("/api/admin/v1",v1AdminRoute)
+
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

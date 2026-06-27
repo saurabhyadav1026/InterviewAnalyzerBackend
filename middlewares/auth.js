@@ -1,1 +1,9 @@
-const x=5;
+
+
+
+const auth=(req,res,next)=>{
+
+
+}
+
+export default auth;
