@@ -20,7 +20,7 @@ export const getTestHistory = async (req, res) => {
 
     return res.status(200).json({
       message: "Test history retrieved successfully",
-      history,g
+      history,
     });
   } catch (error) {
     console.error(error);
