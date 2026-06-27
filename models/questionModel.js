@@ -1,4 +1,4 @@
-import mongoose  from "mongoose"
+import mongoose from "mongoose";
 
 const questionSchema = mongoose.Schema({
     questionId : Number,
@@ -9,10 +9,6 @@ const questionSchema = mongoose.Schema({
     },
     questionImage:{
         type:String
-    },
-
-    questionsImage:{
-        type: String
     },
 
     options:[{
@@ -41,6 +37,4 @@ const questionSchema = mongoose.Schema({
 })
 
 
-const Question = mongoose.model("Question",questionSchema)
-
-export default Question;
+export default mongoose.model("Question",questionSchema);
