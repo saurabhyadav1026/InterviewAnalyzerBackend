@@ -11,10 +11,6 @@ const questionSchema = mongoose.Schema({
         type:String
     },
 
-    questionsImage:{
-        type: String
-    },
-
     options:[{
         type:String,
         required: true
