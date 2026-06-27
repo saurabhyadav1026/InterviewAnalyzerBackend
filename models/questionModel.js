@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 const questionSchema = mongoose.Schema({
     questionId : Number,
@@ -9,10 +9,6 @@ const questionSchema = mongoose.Schema({
     },
     questionImage:{
         type:String
-    },
-
-    questionsImage:{
-        type: String
     },
 
     options:[{
@@ -41,4 +37,6 @@ const questionSchema = mongoose.Schema({
 })
 
 
-module.exports = mongoose.model("Question",questionSchema)
+const question = mongoose.model("question",questionSchema)
+
+export default question;
