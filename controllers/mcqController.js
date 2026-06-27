@@ -32,8 +32,47 @@ export const addMCQ = async (req, res) => {
 };
 
 export const updateQues = async(req,res)=>{
-    res.send("processed")
-}
+    try {
+      const updatedMCQ =
+        await MCQ.findByIdAndUpdate(
+          req.params.id,
+          {
+            subject:
+              req.body.subject,
+            question:
+              req.body.question,
+            options:
+              req.body.options,
+            answer:
+              req.body.answer,
+            explanation:
+              req.body.explanation,
+          },
+          {
+            new: true,
+          }
+        );
+
+      if (!updatedMCQ) {
+        return res.status(404).json({
+          message: "MCQ not found",
+        });
+      }
+
+      res.json({
+        message:
+          "MCQ updated successfully",
+        mcq: updatedMCQ,
+      });
+    } catch (err) {
+      console.log(err);
+
+      res.status(500).json({
+        message: err.message,
+      });
+    }
+  }
+
 
 
 
