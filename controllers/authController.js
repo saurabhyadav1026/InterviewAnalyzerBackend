@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -24,12 +25,7 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: "User with that email or username already exists" });
         }
 
-        const user = await User.create({
-            username,
-            name,
-            email,
-            password
-        });
+        const user = await User.create({ username, name, email, password });
 
         if (user) {
             res.status(201).json({
@@ -49,4 +45,42 @@ const registerUser = async (req, res) => {
     }
 };
 
-export { registerUser };
+const loginUser = async (req, res) => {
+    try {
+        if (!req.body) {
+            return res.status(400).json({ message: "Request body is missing." });
+        }
+
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Please provide email and password" });
+        }
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id)
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error during login", error: error.message });
+    }
+};
+
+export { registerUser, loginUser };
