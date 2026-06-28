@@ -1,7 +1,6 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose";
 
 const questionSchema = mongoose.Schema({
-    questionId : Number,
 
     question:{
         type: String,
@@ -9,10 +8,6 @@ const questionSchema = mongoose.Schema({
     },
     questionImage:{
         type:String
-    },
-
-    questionsImage:{
-        type: String
     },
 
     options:[{
@@ -31,7 +26,7 @@ const questionSchema = mongoose.Schema({
     },
 
     subjectId:{
-        type: Number,
+        type: String,
         required: true
     },
 
@@ -41,4 +36,4 @@ const questionSchema = mongoose.Schema({
 })
 
 
-module.exports = mongoose.model("Question",questionSchema)
+export default mongoose.model("Question",questionSchema);
