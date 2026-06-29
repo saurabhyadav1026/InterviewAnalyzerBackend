@@ -848,3 +848,186 @@ const osQuesitions=[
     "about": "Multiprogramming keeps the CPU busy by executing multiple programs concurrently."
   }
 ]
+
+const cnQuestions = [
+  {
+    question: "In Go-Back-N ARQ, if the window size is 15 and sequence number is 5 bits, what is the maximum number of packets that can be sent before waiting for ACK?",
+    questionImage: "",
+    options: ["15", "16", "31", "32"],
+    answer: "15",
+    topic: "Data Link Layer",
+    subjectId: "CN001",
+    about: "Go-Back-N ARQ"
+  },
+  {
+    question: "A network has bandwidth of 10 Mbps and one-way propagation delay of 20 ms. What is the bandwidth-delay product?",
+    questionImage: "",
+    options: ["25 KB", "50 KB", "100 KB", "200 KB"],
+    answer: "50 KB",
+    topic: "Transport Layer",
+    subjectId: "CN001",
+    about: "Bandwidth Delay Product"
+  },
+  {
+    question: "Refer to the diagram shown above. Identify the network topology.",
+    questionImage: "https://example.com/images/mesh-topology.png",
+    options: ["Star Topology", "Bus Topology", "Full Mesh Topology", "Partial Mesh Topology"],
+    answer: "Full Mesh Topology",
+    topic: "Network Topologies",
+    subjectId: "CN001",
+    about: "Mesh Topology"
+  },
+  {
+    question: "Which of the following routing protocols is a Path Vector protocol?",
+    questionImage: "",
+    options: ["OSPF", "RIP", "BGP", "EIGRP"],
+    answer: "BGP",
+    topic: "Routing",
+    subjectId: "CN001",
+    about: "BGP Protocol"
+  },
+  {
+    question: "In TCP congestion control, during slow start phase, congestion window increases:",
+    questionImage: "",
+    options: ["Linearly", "Exponentially", "Logarithmically", "Remains constant"],
+    answer: "Exponentially",
+    topic: "Transport Layer",
+    subjectId: "CN001",
+    about: "TCP Congestion Control"
+  },
+  {
+    question: "Longest prefix match is used in:",
+    questionImage: "",
+    options: ["MAC address lookup", "IP address lookup", "Port number lookup", "Host name resolution"],
+    answer: "IP address lookup",
+    topic: "Network Layer",
+    subjectId: "CN001",
+    about: "Routing Table Lookup"
+  },
+  {
+    question: "The diagram above shows TCP connection establishment. If client initial sequence number is 2000, what will be the ACK number sent by server in second packet?",
+    questionImage: "https://example.com/images/tcp-3-way-handshake.png",
+    options: ["2000", "2001", "0", "4001"],
+    answer: "2001",
+    topic: "Transport Layer",
+    subjectId: "CN001",
+    about: "TCP 3-Way Handshake"
+  },
+  {
+    question: "Efficiency of Slotted ALOHA protocol is:",
+    questionImage: "",
+    options: ["18.4%", "26.8%", "36.8%", "50%"],
+    answer: "36.8%",
+    topic: "Data Link Layer",
+    subjectId: "CN001",
+    about: "Slotted ALOHA"
+  },
+  {
+    question: "EIGRP is an example of:",
+    questionImage: "",
+    options: ["Distance Vector", "Link State", "Hybrid Routing", "Path Vector"],
+    answer: "Hybrid Routing",
+    topic: "Routing",
+    subjectId: "CN001",
+    about: "EIGRP"
+  },
+  {
+    question: "Refer to the diagram. Which routing algorithm is shown in the figure?",
+    questionImage: "https://example.com/images/distance-vector.png",
+    options: ["Link State", "Distance Vector", "Path Vector", "Flooding"],
+    answer: "Distance Vector",
+    topic: "Routing Algorithms",
+    subjectId: "CN001",
+    about: "Distance Vector Routing"
+  },
+  {
+    question: "What is the size of TCP header without options?",
+    questionImage: "",
+    options: ["16 bytes", "20 bytes", "24 bytes", "32 bytes"],
+    answer: "20 bytes",
+    topic: "Transport Layer",
+    subjectId: "CN001",
+    about: "TCP Header"
+  },
+  {
+    question: "In IPv6, SLAAC is used for:",
+    questionImage: "",
+    options: ["Error reporting", "Address autoconfiguration", "Routing", "Fragmentation"],
+    answer: "Address autoconfiguration",
+    topic: "Network Layer",
+    subjectId: "CN001",
+    about: "IPv6"
+  },
+  {
+    question: "Refer to the network diagram. How many subnets and hosts per subnet are possible if we use /26 mask on 192.168.10.0/24 network?",
+    questionImage: "https://example.com/images/subnetting-diagram.png",
+    options: ["4 subnets, 62 hosts", "8 subnets, 30 hosts", "4 subnets, 30 hosts", "8 subnets, 62 hosts"],
+    answer: "4 subnets, 62 hosts",
+    topic: "Subnetting",
+    subjectId: "CN001",
+    about: "Subnetting"
+  },
+  {
+    question: "RED (Random Early Detection) is a mechanism for:",
+    questionImage: "",
+    options: ["Error correction", "Congestion avoidance", "Flow control", "Fragmentation"],
+    answer: "Congestion avoidance",
+    topic: "Network Layer",
+    subjectId: "CN001",
+    about: "Congestion Control"
+  },
+  {
+    question: "OSPF is which type of routing protocol?",
+    questionImage: "",
+    options: ["Distance Vector", "Link State", "Hybrid", "Path Vector"],
+    answer: "Link State",
+    topic: "Routing",
+    subjectId: "CN001",
+    about: "OSPF"
+  },
+  {
+    question: "The minimum Hamming distance to detect 'd' errors is:",
+    questionImage: "",
+    options: ["d", "d+1", "2d", "2d+1"],
+    answer: "d+1",
+    topic: "Error Control",
+    subjectId: "CN001",
+    about: "Error Detection"
+  },
+  {
+    question: "What does TTL field in IP header prevent?",
+    questionImage: "",
+    options: ["Packet loss", "Infinite routing loops", "Congestion", "Fragmentation"],
+    answer: "Infinite routing loops",
+    topic: "Network Layer",
+    subjectId: "CN001",
+    about: "IP Header"
+  },
+  {
+    question: "Refer to the header diagram shown above. Which field is used for QoS in IPv4?",
+    questionImage: "https://example.com/images/ipv4-header.png",
+    options: ["TTL", "Protocol", "Type of Service", "Fragment Offset"],
+    answer: "Type of Service",
+    topic: "Network Layer",
+    subjectId: "CN001",
+    about: "IPv4 Header"
+  },
+  {
+    question: "Which of the following is a private IPv4 address range?",
+    questionImage: "",
+    options: ["12.0.0.0/8", "172.16.0.0/12", "192.0.0.0/8", "224.0.0.0/4"],
+    answer: "172.16.0.0/12",
+    topic: "IP Addressing",
+    subjectId: "CN001",
+    about: "Private IP Addresses"
+  },
+  {
+    question: "In Selective Repeat ARQ, the maximum window size with n-bit sequence number is:",
+    questionImage: "",
+    options: ["2^n", "2^(n-1)", "2^n - 1", "2^(n+1)"],
+    answer: "2^(n-1)",
+    topic: "Data Link Layer",
+    subjectId: "CN001",
+    about: "Selective Repeat ARQ"
+  }
+];
