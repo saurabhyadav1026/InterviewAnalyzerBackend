@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 
 
-export const createSubject = async (req, res) => {
+export const addSubject = async (req, res) => {
     try {
         const { name } = req.body;
 
