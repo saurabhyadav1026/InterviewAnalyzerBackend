@@ -283,3 +283,57 @@ class SlidingWindowRateLimiter {
         SecurityLogger.logEvent("IP_BLOCK_EXPIRED", { ip }, "INFO");
       }
     }
+  }
+
+  /**
+   * Helper to retrieve client IP from Express request.
+   * Handles trust proxies if they are configured.
+   * 
+   * @param {object} req - Express request object
+   * @returns {string} Client IP address
+   */
+  getClientIp(req) {
+    return (
+      req.headers["x-forwarded-for"] ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      (req.connection.socket ? req.connection.socket.remoteAddress : null) ||
+      "unknown-ip"
+    );
+  }
+
+  /**
+   * Evaluates the rate limits for a given IP and User Identifier.
+   * 
+   * @param {string} ip - Client IP address
+   * @param {string} userId - User identifier (if user is authenticated, else 'anonymous')
+   * @returns {object} Rate limit status details
+   */
+  evaluate(ip, userId) {
+    const now = Date.now();
+    const cutoff = now - this.windowMs;
+
+    // 1. Check Blocklist for IP
+    if (this.blocklist.has(ip)) {
+      const blockExpires = this.blocklist.get(ip);
+      if (now < blockExpires) {
+        const remainingSeconds = Math.ceil((blockExpires - now) / 1000);
+        return {
+          allowed: false,
+          reason: "IP_BLOCKED",
+          retryAfterSeconds: remainingSeconds,
+          limit: this.maxIpRequests,
+          remaining: 0,
+          resetTime: blockExpires
+        };
+      } else {
+        this.blocklist.delete(ip);
+      }
+    }
+
+    const ipKey = `ip:${ip}`;
+    const userKey = `user:${userId}`;
+
+    // 2. Fetch or create timestamp logs
+    let ipTimestamps = this.store.get(ipKey) || [];
+    let userTimestamps = this.store.get(userKey) || [];
