@@ -797,3 +797,60 @@ export {
 // =========================================================================
 // 8. TEST SUITE AND MOCK SCRIPT FOR DEVELOPMENT
 // =========================================================================
+
+/**
+ * Self-Testing Sandbox instructions:
+ * 
+ * To write unit/integration tests for this code, you can use the test suite code provided below.
+ * It mocks the Express request/response cycles to verify authentication checks, validation rules,
+ * password matching, and sliding window rate limits.
+ * 
+ * To run the self-tests in your development environment:
+ * 1. Create a temporary file: `scratch/testChangePassword.js`
+ * 2. Paste the following mock suite.
+ * 3. Execute with: `node scratch/testChangePassword.js`
+ *
+ * [Example test suite structure inside comment block]
+ * 
+ * import { validatePasswordInput } from '../controllers/changePasswordBundle.js';
+ * 
+ * function runTests() {
+ *   console.log("Starting Change Password Bundle Self-Tests...");
+ * 
+ *   // Test Case 1: Empty password input check
+ *   const req1 = { body: {} };
+ *   const res1 = {
+ *     status: function(code) {
+ *       console.assert(code === 400, "Should return 400 for empty body");
+ *       return this;
+ *     },
+ *     json: function(data) {
+ *       console.log("✓ Empty body rejected with:", data.message);
+ *     }
+ *   };
+ *   validatePasswordInput(req1, res1, () => {
+ *     console.error("✗ Failed: Should not have passed validation with empty body");
+ *   });
+ * 
+ *   // Test Case 2: Matching validation rules
+ *   const req2 = {
+ *     body: {
+ *       currentPassword: "OldPassword1!",
+ *       newPassword: "simple",
+ *       confirmPassword: "simple"
+ *     }
+ *   };
+ *   const res2 = {
+ *     status: function(code) {
+ *       console.assert(code === 400, "Should return 400 for simple password");
+ *       return this;
+ *     },
+ *     json: function(data) {
+ *       console.log("✓ Simple password rejected. Error list length:", data.errors.length);
+ *     }
+ *   };
+ *   validatePasswordInput(req2, res2, () => {
+ *     console.error("✗ Failed: Should not have passed validation with simple password");
+ *   });
+ * }
+ */
