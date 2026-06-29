@@ -1,10 +1,31 @@
 
+import Question from "../../models/Question.js";
 import Test from "../../models/Test.js"
 
-const generateTest=()=>{
+const generateTest=async(req, res)=>{
 
-    const questions={};
+    try{
+    const questions= await Question.aggregate([
+  {
+    $match: {
+      subjectId:req.query.subjectId,
+      
+    }
+  },
+  {
+    $sample: { size: 20 }
+  }
+]);
 
+
+const _id=await addTest(questions.map(doc => doc._id.toString()));
+res.status(200).send({status:true,_id,questions})
+
+    }catch(err){
+
+        console.log(err);
+        res.status(500).send({status:false,_id,questions})
+    }
 
 
 }
@@ -12,12 +33,16 @@ const generateTest=()=>{
 export default generateTest;
 
 
-const addTest=(questons)=>{
+const addTest=async(questons)=>{
 
-const test=new Test({})
+    try{
+const test=await Test.create({questons})
 
-return 
+return test._id.toString();
+    }catch(err){
 
+         console.log(err);
+         return new Error("test not added");
+    }
 }
 
-getTest

@@ -34,7 +34,7 @@ export const updateQuestion = async(req,res)=>{
       const updatedMCQ =
         await MCQ.findByIdAndUpdate(
           req.params._id,
-         { $set:{
+         {
             subjectId:
               req.body.subject,
             question:
@@ -44,7 +44,9 @@ export const updateQuestion = async(req,res)=>{
               req.body.answer,
             explanation:
               req.body.explanation,
-          }},
+          },{
+            new:true
+          }
           
         );
 
