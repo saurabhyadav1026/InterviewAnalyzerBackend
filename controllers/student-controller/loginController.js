@@ -9,6 +9,7 @@ const generateToken = (user) => {
 };
 
 const loginUser = async (req, res) => {
+    console.log("you will get loggin")
     try {
         const { email, password } = req.body;
 
@@ -38,14 +39,13 @@ const loginUser = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            secure:true,
+            sameSite: "None",
             maxAge: 30 * 24 * 60 * 60 * 1000
         });
 
         res.status(200).json({
             _id: user._id,
-            username: user.username,
             name: user.name,
             email: user.email,
             role: user.role,

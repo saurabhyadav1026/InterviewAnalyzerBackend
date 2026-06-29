@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        minlength: [6, "Password must be at least 6 characters long"]
+       
     },
     role: {
         type: String,
@@ -36,6 +36,6 @@ userSchema.pre("save", async function() {
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

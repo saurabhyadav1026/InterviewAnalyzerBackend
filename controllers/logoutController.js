@@ -6,15 +6,13 @@ export const logoutUser = async (req, res) =>
 const refreshTokenFromBody = req.body ? req.body.refreshToken : null;
 
 
-        const cookieOptions = {
+        const cookieOptions= {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", 
-            sameSite: "strict",
-            path: "/" 
-        };
-        
-        
-        res.clearCookie("token", cookieOptions);
+            secure:true,
+            sameSite: "None",
+            maxAge: 30 * 24 * 60 * 60 * 1000
+        }
+    
         res.clearCookie("refreshToken", cookieOptions);
 
         return res.status(200).json({

@@ -9,8 +9,26 @@ import cookieParser from "cookie-parser";
 
 
 const app = express();
+console.log( process.env.OfflineUrl)
 
-app.use(cors());
+app.use(cors({
+    origin: function(origin, callback) {
+        const allowedOrigins = [
+            process.env.OfflineUrl,
+            process.env.OnlineUrl
+        ];
+
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.log("Blocked by CORS:", origin);
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true
+}));
+
+
 app.use(cookieParser());
 app.use(express.json());
 

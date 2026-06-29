@@ -604,9 +604,7 @@ const validatePasswordInput = (req, res, next) => {
     const user = req.user;
     const lowerPassword = newPassword.toLowerCase();
     
-    if (user.username && lowerPassword.includes(user.username.toLowerCase())) {
-      errors.push("Password must not contain your username.");
-    }
+   
     if (user.email && lowerPassword.includes(user.email.split("@")[0].toLowerCase())) {
       errors.push("Password must not contain parts of your email address.");
     }
