@@ -8,16 +8,17 @@ import generateTest from "../controllers/student-controller/generateTest.js";
 const v1Route=express.Router();
 
 
-v1Route.get("/hello",(req,res)=>{
 
-    res.send("hello buddy");
-})
 
 v1Route.post("/register", registerUser);
 v1Route.post("/login",authMiddleware, loginUser);
 
+
+
 v1Route.get("/getsubjects",getSubjectList)
 v1Route.get("/generateTest",generateTest)
+
+
 
 
 
