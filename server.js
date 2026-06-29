@@ -4,23 +4,16 @@ import express from "express";
 import cors from "cors";
 import v1Route from "./routes/v1Route.js";
 import v1AdminRoute from "./routes/v1AdminRoute.js";
-import YAML from "yamljs";
-import { serve, setup } from "swagger-ui-express";
-import Subject from "./models/Subject.js";
 import dbconnect from "./config/db.js";
+import cookieParser from "cookie-parser";
+
+app.use(cookieParser());
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const swaggerDoc =YAML.load("./docs/swagger.yaml");
-
-app.use(
-  "/api-docs",
-  serve,
-  setup(swaggerDoc)
-);
 
 
 
@@ -42,9 +35,9 @@ app.use("/api/admin/v1",v1AdminRoute)
 
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-      console.log("Swagger docs at http://localhost:3000/api-docs");
+
+app.listen(process.env.PORT,'0.0.0.0', () => {
+    console.log(`Server is running on port `);
+    
 });
 
