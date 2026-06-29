@@ -6,6 +6,8 @@ import v1Route from "./routes/v1Route.js";
 import v1AdminRoute from "./routes/v1AdminRoute.js";
 import YAML from "yamljs";
 import { serve, setup } from "swagger-ui-express";
+import Subject from "./models/Subject.js";
+import dbconnect from "./config/db.js";
 
 const app = express();
 
@@ -22,10 +24,15 @@ app.use(
 
 
 
+
+
+
+
 // Use both DB connection methods just in case one replaces the other
 try {
     dbconnect();
 } catch (e) {
+  console.log(e)
     console.log("Using fallback mongo connection");
 }
 

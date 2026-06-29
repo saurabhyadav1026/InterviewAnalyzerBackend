@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const testSchema=mongoose.Schema({
     userId:{type:String,
-        require:true
+        required:true
     },
     subject:{
         type: mongoose.Schema.Types.ObjectId,
@@ -14,7 +14,11 @@ const testSchema=mongoose.Schema({
         ref: 'Question',
     },
     answer:{
-        type:string,
+        type:String,
+        default:null
+    },
+    isCorrect:{
+        type:Boolean,
         default:null
     }
 
@@ -30,9 +34,9 @@ const testSchema=mongoose.Schema({
     },
     ai_analysis:{
         type:String,
-        require:true
+        default:null
     }
 })
 
-const Test=mongoose.Model("Test",testSchema);
+const Test=mongoose.model("Test",testSchema);
 export default Test;
