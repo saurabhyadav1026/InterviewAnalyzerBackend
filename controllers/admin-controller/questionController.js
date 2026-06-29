@@ -3,7 +3,7 @@ export const addQuestion = async (req, res) => {
   try {
     const { question, options, answer, topic, subjectId, about="" } = req.body;
 
-    const { question } = req.body;
+    
 
     const existingQuestion = await Question.findOne({ question });
 
