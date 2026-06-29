@@ -3,9 +3,13 @@ export const addQuestion = async (req, res) => {
   try {
     const { question, options, answer, topic, subjectId, about="" } = req.body;
 
-    if (!question) {
+    const { question } = req.body;
+
+    const existingQuestion = await Question.findOne({ question });
+
+    if (existingQuestion) {
       return res.status(400).json({
-        message: "Question is required"
+        message: "Question already exists"
       });
     }
 
@@ -32,18 +36,20 @@ export const addQuestion = async (req, res) => {
 export const updateQuestion = async(req,res)=>{
     try {
       const updatedMCQ =
-        await MCQ.findByIdAndUpdate(
+        await Question.findByIdAndUpdate(
           req.params._id,
          {
-            subjectId:
-              req.body.subject,
             question:
               req.body.question,
             options:  req.body.options,
             answer:
               req.body.answer,
-            explanation:
+            topic:
               req.body.explanation,
+            subjectId:
+              req.body.subjectId,
+            about:
+              req.body.about    
           },{
             new:true
           }
@@ -74,7 +80,7 @@ export const updateQuestion = async(req,res)=>{
 export const deleteQues = async(req,res) => {
     try {
       const mcq =
-        await MCQ.findById(
+        await Question.findById(
           req.params.id
         );
 
@@ -85,7 +91,7 @@ export const deleteQues = async(req,res) => {
         });
       }
 
-      await MCQ.findByIdAndDelete(
+      await Question.findByIdAndDelete(
         req.params.id
       );
 
