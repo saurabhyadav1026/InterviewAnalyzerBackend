@@ -1,12 +1,32 @@
-import mongoose, { Model } from "mongoose" 
+import mongoose from "mongoose" 
 
 const testSchema=mongoose.Schema({
-    userid:{type:String,
+    userId:{type:String,
         require:true
     },
-    questions:{
-        type:Array,
-        require:true
+    subject:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Subject'
+    },
+
+    questions:[{question:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question',
+    },
+    answer:{
+        type:string,
+        default:null
+    }
+
+}],
+
+    startTime:{
+        type:Date,
+        default:Date.now
+    },
+    endTime:{
+        type:Date,
+        default:null
     },
     ai_analysis:{
         type:String,

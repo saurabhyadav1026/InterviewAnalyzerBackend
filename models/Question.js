@@ -7,7 +7,8 @@ const questionSchema = mongoose.Schema({
         required: true
     },
     questionImage:{
-        type:String
+        type:String,
+        default:null
     },
 
     options:[{
@@ -25,9 +26,9 @@ const questionSchema = mongoose.Schema({
         required: String
     },
 
-    subjectId:{
-        type: String,
-        required: true
+    subjectId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Subject'
     },
 
     about:{
