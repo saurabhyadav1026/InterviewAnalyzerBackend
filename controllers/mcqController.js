@@ -2,23 +2,18 @@ import Question from '../models/questionModel.js'
 
 export const addMCQ = async (req, res) => {
   try {
-    const { questionId, question, options, answer, topic, subjectId, about } = req.body;
 
-    if (!question) {
+    const { question } = req.body;
+
+    const existingQuestion = await Question.findOne({ question });
+
+    if (existingQuestion) {
       return res.status(400).json({
-        message: "Question is required"
+        message: "Question already exists"
       });
     }
 
-    await Question.create({
-      questionId,
-      question,
-      options,
-      answer,
-      topic,
-      subjectId,
-      about
-    });
+    const newQuestion = await Question.create(req.body);
 
     res.status(201).json({
       message: "Question added successfully"
@@ -34,19 +29,21 @@ export const addMCQ = async (req, res) => {
 export const updateQues = async(req,res)=>{
     try {
       const updatedMCQ =
-        await MCQ.findByIdAndUpdate(
+        await Question.findByIdAndUpdate(
           req.params.id,
           {
-            subject:
-              req.body.subject,
             question:
               req.body.question,
             options:
               req.body.options,
             answer:
               req.body.answer,
-            explanation:
-              req.body.explanation,
+            topic:
+              req.body.topic,
+            subjectId:
+              req.body.subjectId,
+            about:
+              req.body.about  
           },
           {
             new: true,
@@ -77,7 +74,7 @@ export const updateQues = async(req,res)=>{
 export const deleteQues = async(req,res) => {
     try {
       const mcq =
-        await MCQ.findById(
+        await Question.findById(
           req.params.id
         );
 
@@ -88,7 +85,7 @@ export const deleteQues = async(req,res) => {
         });
       }
 
-      await MCQ.findByIdAndDelete(
+      await Question.findByIdAndDelete(
         req.params.id
       );
 

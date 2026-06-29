@@ -6,6 +6,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import v1Route from "./routes/v1Route.js";
 import dbconnect from "./config/db.js";
+import mcqRoutes from './routes/mcqRoutes.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ try {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/v1", v1Route);
+app.use("/api/v1/question",mcqRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
