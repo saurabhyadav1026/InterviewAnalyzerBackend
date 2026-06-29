@@ -668,3 +668,113 @@ const validatePasswordInput = (req, res, next) => {
       errors
     });
   }
+
+  next();
+};
+
+
+// =========================================================================
+// 6. MAIN CHANGE PASSWORD CONTROLLER
+// =========================================================================
+
+/**
+ * Controller to handle changing user password.
+ * Verifies current password using bcrypt, sets new password, and triggers save.
+ * Uses existing schema properties and validation logic.
+ * 
+ * @param {object} req - Express request
+ * @param {object} res - Express response
+ */
+const changePasswordController = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const user = req.user; // Set by authMiddleware
+
+  try {
+    // 1. Double check user exists (paranoid database check)
+    const dbUser = await User.findById(user._id).select("+password"); // explicitly select password if omitted by default select options
+    
+    if (!dbUser) {
+      SecurityLogger.logEvent("PASSWORD_CHANGE_FAILED", {
+        userId: user._id,
+        reason: "User not found in database during change"
+      }, "ERROR");
+
+      return res.status(404).json({
+        status: false,
+        message: "User account could not be found."
+      });
+    }
+
+    // 2. Cryptographically verify current password
+    // (Existing schema stores bcrypt hashes)
+    const isMatch = await bcrypt.compare(currentPassword, dbUser.password);
+    
+    if (!isMatch) {
+      SecurityLogger.logEvent("PASSWORD_CHANGE_FAILED", {
+        userId: user._id,
+        reason: "Incorrect current password supplied"
+      }, "WARN");
+
+      return res.status(401).json({
+        status: false,
+        message: "Invalid current password. Verification failed."
+      });
+    }
+
+    // 3. Apply password update
+    // Note: The Mongoose Schema in models/user.js has a pre("save") hook:
+    // userSchema.pre("save", async function() {
+    //     if (!this.isModified("password")) return;
+    //     const salt = await bcrypt.genSalt(10);
+    //     this.password = await bcrypt.hash(this.password, salt);
+    // });
+    //
+    // Therefore, by setting dbUser.password to the plain-text newPassword and calling save(),
+    // the pre-save hook will automatically hash the password before saving to the DB.
+    dbUser.password = newPassword;
+
+    // 4. Save User document to database
+    // This executes the Mongoose pre-save hook and schema validations
+    await dbUser.save();
+
+    // 5. Log Security Event Audit Trail
+    SecurityLogger.logEvent("PASSWORD_CHANGE_SUCCESS", {
+      userId: dbUser._id,
+      email: dbUser.email,
+      ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress
+    }, "INFO");
+
+    // 6. Return Success Status
+    // Standard Security Guideline: Advise user to re-login to ensure new tokens are generated.
+    // In our authMiddleware, we check iat vs updatedAt. The save() command updates updatedAt.
+    // Therefore, all existing tokens issued before this instant will automatically be invalid on the next request.
+    return res.status(200).json({
+      status: true,
+      message: "Password changed successfully. Your session has been updated, please authenticate using your new credentials if required."
+    });
+
+  } catch (error) {
+    SecurityLogger.logEvent("PASSWORD_CHANGE_EXCEPTION", {
+      userId: user ? user._id : "unknown",
+      error: error.message,
+      stack: error.stack
+    }, "ERROR");
+
+    return res.status(500).json({
+      status: false,
+      message: "An internal server error occurred while updating your password. Please try again later.",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined
+    });
+  }
+};
+
+
+// =========================================================================
+// 7. COMPREHENSIVE MIDDLEWARE STACK & EXPORTS
+// =========================================================================
+
+// Combined middleware chain that provides full protection for the change-password route.
+// Order of Execution:
+// 1. Parse token and authenticate user (authMiddleware)
+// 2. Evaluate rate limits (changePasswordLimiter.getMiddleware())
+// 3. Validate input schema and password complexity (validatePasswordInput)
