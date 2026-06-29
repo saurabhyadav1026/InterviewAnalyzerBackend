@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+import jwt from 'jsonwebtoken'
+import User from '../models/user.js'
+import adminMiddleware from './adminMiddleware.js';
 
-module.exports = async (req, res, next) => {
+export default adminMiddleware = async (req, res, next) => {
   try {
 
     const token = req.cookies.refreshToken;

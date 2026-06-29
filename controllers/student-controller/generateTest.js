@@ -6,7 +6,7 @@ import Test from "../../models/Test.js"
 
 
 
-const generateTest=async(req, res)=>{
+export const generateTest=async(req, res)=>{
 
     try{
       const subjectId=new mongoose.Types.ObjectId(req.query.subjectId)
@@ -38,15 +38,15 @@ res.status(200).send({status:true,test})
 
 }
 
-export default generateTest;
+// export default generateTest;
 
 
-const addAndGetTest=async(userId,subjectId,questons)=>{
+export const addAndGetTest=async(userId,subjectId,questons)=>{
 
     try{
-const test=await Test.create({userId,subject:subjectId,questons})
+         const test=await Test.create({userId,subject:subjectId,questons})
 
-return getTest(test._id);
+         return getTest(test._id);
 
     }catch(err){
 
@@ -59,9 +59,7 @@ return getTest(test._id);
 
 
 
-
-
-const getTest=async(testId)=>{
+export const getTest=async(testId)=>{
 
 const test = await Test.findById(testId)
     .populate('questions.question')
@@ -69,3 +67,4 @@ const test = await Test.findById(testId)
 
     return test;
 }
+

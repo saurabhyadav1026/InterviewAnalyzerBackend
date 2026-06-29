@@ -20,5 +20,234 @@ paths:
       responses:
         "200":
           description: List of users returned successfully
+  /api/v1/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - username
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Validation error
+        "500":
+          description: Internal Server Error
 
+  /api/v1/login:
+    post:
+      summary: Login user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: test@gmail.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        "200":
+          description: Login successful and refreshToken cookie set
+          headers:
+            Set-Cookie:
+              description: HttpOnly refresh token cookie
+              schema:
+                type: string
+        "400":
+          description: Email and password required
+        "401":
+          description: Invalid email or password
+        "500":
+          description: Server error during login 
+
+
+paths:
+  /api/v1/question/add:
+    post:
+      summary: Add a new question
+      tags:
+        - Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                options:
+                  type: array
+                  items:
+                    type: string
+                answer:
+                  type: string
+                topic:
+                  type: string
+                subjectId:
+                  type: string
+                about:
+                  type: string
+      responses:
+        "201":
+          description: Question added successfully
+        "400":
+          description: Question already exists
+        "500":
+          description: Internal Server Error
+
+  /api/v1/question/update/{id}:
+    post:
+      summary: Update a question
+      tags:
+        - Questions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                options:
+                  type: array
+                  items:
+                    type: string
+                answer:
+                  type: string
+                topic:
+                  type: string
+                subjectId:
+                  type: string
+                about:
+                  type: string
+      responses:
+        "200":
+          description: Question updated successfully
+        "404":
+          description: Question not found
+        "500":
+          description: Internal Server Error
+
+  /api/v1/question/delete/{id}:
+    delete:
+      summary: Delete a question
+      tags:
+        - Questions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Question deleted successfully
+        "404":
+          description: Question not found
+        "500":
+          description: Internal Server Error
+
+paths:
+  /api/v1/admin/test/generatetest:
+    post:
+      summary: Generate a random test
+      tags:
+        - Tests
+      parameters:
+        - in: query
+          name: subjectId
+          required: true
+          schema:
+            type: string
+          description: MongoDB Subject ID
+      responses:
+        "200":
+          description: Test generated successfully
+        "500":
+          description: Something went wrong
+
+  /api/v1/admin/test/addtest:
+    post:
+      summary: Create and save a test
+      tags:
+        - Tests
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                subjectId:
+                  type: string
+                questions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      question:
+                        type: string
+      responses:
+        "200":
+          description: Test added successfully
+        "500":
+          description: Internal Server Error
+
+  /api/v1/admin/test/addtest:
+    get:
+      summary: Get a test by ID
+      tags:
+        - Tests
+      parameters:
+        - in: query
+          name: testId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Test fetched successfully
+        "404":
+          description: Test not found
+        "500":
+          description: Internal Server Error
 
