@@ -41,7 +41,7 @@
 
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import User from "../models/user.js";
+import User from "../models/User.js";
 
 // =========================================================================
 // 1. OPENAPI / SWAGGER DOCUMENTATION SPECIFICATIONS

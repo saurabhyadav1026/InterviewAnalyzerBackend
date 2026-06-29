@@ -1,4 +1,4 @@
-import test from "../models/test.js";
+import test from "../models/Test.js";
 
 export const getTotalSolvedQuestions = async (req, res) => {
   try {

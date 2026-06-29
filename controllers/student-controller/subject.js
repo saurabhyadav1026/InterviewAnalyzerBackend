@@ -1,7 +1,7 @@
 
 // does CRUD operations
 
-import Subject from "../models/subject.js";
+import Subject from "../models/Subject.js";
 import mongoose from "mongoose";
 
 
