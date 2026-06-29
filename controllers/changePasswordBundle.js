@@ -337,3 +337,109 @@ class SlidingWindowRateLimiter {
     // 2. Fetch or create timestamp logs
     let ipTimestamps = this.store.get(ipKey) || [];
     let userTimestamps = this.store.get(userKey) || [];
+
+    // Filter out timestamps outside window
+    ipTimestamps = ipTimestamps.filter(ts => ts > cutoff);
+    userTimestamps = userTimestamps.filter(ts => ts > cutoff);
+
+    // 3. Evaluate limits
+    let allowed = true;
+    let reason = null;
+    let limitUsed = this.maxIpRequests;
+    let remainingRequests = this.maxIpRequests - ipTimestamps.length;
+    let oldestTimestamp = ipTimestamps[0] || now;
+
+    // Check IP limit
+    if (ipTimestamps.length >= this.maxIpRequests) {
+      allowed = false;
+      reason = "IP_LIMIT_EXCEEDED";
+      limitUsed = this.maxIpRequests;
+      remainingRequests = 0;
+    }
+    // Check User limit (if authenticated and not anonymous)
+    else if (userId && userId !== "anonymous" && userTimestamps.length >= this.maxUserRequests) {
+      allowed = false;
+      reason = "USER_LIMIT_EXCEEDED";
+      limitUsed = this.maxUserRequests;
+      remainingRequests = 0;
+      oldestTimestamp = userTimestamps[0] || now;
+    }
+
+    // 4. Calculate reset time
+    const resetTime = oldestTimestamp + this.windowMs;
+    const retryAfterSeconds = Math.max(0, Math.ceil((resetTime - now) / 1000));
+
+    // 5. If allowed, record the request
+    if (allowed) {
+      ipTimestamps.push(now);
+      this.store.set(ipKey, ipTimestamps);
+
+      if (userId && userId !== "anonymous") {
+        userTimestamps.push(now);
+        this.store.set(userKey, userTimestamps);
+      }
+      
+      remainingRequests = Math.max(0, limitUsed - ipTimestamps.length);
+    } else {
+      // If client continues to spam while already blocked/limited, flag for Blocklist
+      if (reason === "IP_LIMIT_EXCEEDED" && ipTimestamps.length > this.maxIpRequests * 3) {
+        const blockExpiry = now + this.blockDurationMs;
+        this.blocklist.set(ip, blockExpiry);
+        SecurityLogger.logEvent("IP_TEMP_BANNED", { ip, reason: "Spamming while limited" }, "WARN");
+      }
+    }
+
+    return {
+      allowed,
+      reason,
+      retryAfterSeconds,
+      limit: limitUsed,
+      remaining: remainingRequests,
+      resetTime
+    };
+  }
+
+  /**
+   * Express middleware generator for rate limiting.
+   */
+  getMiddleware() {
+    return (req, res, next) => {
+      const ip = this.getClientIp(req);
+      
+      // Determine user ID if auth middleware has already run, or fallback to body email if present
+      let userId = "anonymous";
+      if (req.user && req.user._id) {
+        userId = req.user._id.toString();
+      } else if (req.body && req.body.email) {
+        userId = `email:${req.body.email.toLowerCase().trim()}`;
+      }
+
+      const result = this.evaluate(ip, userId);
+
+      // Set standard RFC headers
+      res.setHeader("X-RateLimit-Limit", result.limit);
+      res.setHeader("X-RateLimit-Remaining", result.remaining);
+      res.setHeader("X-RateLimit-Reset", Math.ceil(result.resetTime / 1000));
+
+      if (!result.allowed) {
+        res.setHeader("Retry-After", result.retryAfterSeconds);
+        
+        SecurityLogger.logEvent("RATE_LIMIT_TRIGGERED", {
+          ip,
+          userId,
+          reason: result.reason,
+          retryAfterSeconds: result.retryAfterSeconds,
+          userAgent: req.headers["user-agent"]
+        }, "WARN");
+
+        return res.status(429).json({
+          status: false,
+          message: "Too many password change attempts. Please try again after some time.",
+          retryAfter: result.retryAfterSeconds
+        });
+      }
+
+      next();
+    };
+  }
+}
