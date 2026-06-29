@@ -18,7 +18,7 @@ export default authMiddleware => async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    const user = await User.findById(decoded.id)
+    const user = await User.findById(decoded.userId)
       .select("-password");
 
     if (!user) {
@@ -27,7 +27,8 @@ export default authMiddleware => async (req, res, next) => {
       });
     }
 
-    req.user = user;
+    req.userId = user.userId;
+    req.role=user.role;
 
     next();
 
