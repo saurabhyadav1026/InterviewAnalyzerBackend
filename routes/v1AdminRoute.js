@@ -2,6 +2,8 @@ import express from "express";
 import {addQuestion,deleteQues,updateQuestion} from "../controllers/admin-controller/questionController.js"
 import adminMiddleware from "../middlewares/adminMiddleware.js";
 import Subject from "../models/Subject.js";
+import Question from "../models/Question.js";
+import dsaQuestion from "../Questions/dsaQuestion.js";
 
 const AddSub= async () => {
 
@@ -20,9 +22,8 @@ v1AdminRoute.delete("/question/delete/:id",adminMiddleware,deleteQues)
 
 
 v1AdminRoute.get("/addsub",async(req,res)=>{
-    const resp=await AddSub();
-
-    res.send(resp)
+    const question= await Question.insertMany(dsaQuestion)
+    res.send(question[0])
 
 })
 

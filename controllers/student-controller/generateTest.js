@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 import Question from "../../models/Question.js";
 import Test from "../../models/Test.js"
+import Subject from "../../models/Subject.js";
 
 
 
@@ -22,6 +23,9 @@ const generateTest=async(req, res)=>{
   }
 ]);
 
+console.log(questions)
+
+
 
 // take questions id
 const test=await addAndGetTest(req.userId,subjectId,questions.map((doc) =>{ return {question:doc._id}}));
@@ -41,11 +45,11 @@ res.status(200).send({status:true,test})
 export default generateTest;
 
 
-const addAndGetTest=async(userId,subjectId,questons)=>{
-
+const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
+console.log(questions)
     try{
-const test=await Test.create({userId,subject:subjectId,questons})
-
+const test=await Test.create({userId,subject:subjectId,questions})
+console.log(test)
 return getTest(test._id);
 
     }catch(err){
@@ -65,7 +69,7 @@ const getTest=async(testId)=>{
 
 const test = await Test.findById(testId)
     .populate('questions.question')
-    .pupulate(subject)
+    .populate('subject')
 
     return test;
 }

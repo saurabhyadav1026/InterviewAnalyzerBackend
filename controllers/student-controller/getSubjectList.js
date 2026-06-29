@@ -7,7 +7,7 @@ const getSubjectList = async (req, res) => {
         const sublist = await Subject.find();
 
       
-        res.status(200).json({
+        res.status(200).send({
             status: true,
             sublist
         });
