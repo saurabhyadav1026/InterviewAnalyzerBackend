@@ -45,7 +45,7 @@ export const updateQuestion = async(req,res)=>{
             answer:
               req.body.answer,
             topic:
-              req.body.explanation,
+              req.body.topic,
             subjectId:
               req.body.subjectId,
             about:
