@@ -778,3 +778,22 @@ const changePasswordController = async (req, res) => {
 // 1. Parse token and authenticate user (authMiddleware)
 // 2. Evaluate rate limits (changePasswordLimiter.getMiddleware())
 // 3. Validate input schema and password complexity (validatePasswordInput)
+const changePasswordMiddlewareStack = [
+  authMiddleware,
+  changePasswordLimiter.getMiddleware(),
+  validatePasswordInput
+];
+
+export {
+  authMiddleware,
+  changePasswordLimiter,
+  validatePasswordInput,
+  changePasswordController,
+  changePasswordMiddlewareStack,
+  SecurityLogger
+};
+
+
+// =========================================================================
+// 8. TEST SUITE AND MOCK SCRIPT FOR DEVELOPMENT
+// =========================================================================
