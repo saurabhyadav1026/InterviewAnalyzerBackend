@@ -553,3 +553,118 @@ const authMiddleware = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    SecurityLogger.logEvent("AUTH_MIDDLEWARE_EXCEPTION", { error: error.message }, "ERROR");
+    return res.status(500).json({
+      status: false,
+      message: "Internal server error during authentication check.",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined
+    });
+  }
+};
+
+
+// =========================================================================
+// 5. PASSWORD COMPLEXITY & INPUT VALIDATION MIDDLEWARE
+// =========================================================================
+
+/**
+ * Validates the inputs required for changing password.
+ * Checks password strength constraints (NIST / OWASP requirements).
+ * 
+ * @param {object} req - Express request
+ * @param {object} res - Express response
+ * @param {function} next - Express next middleware function
+ */
+const validatePasswordInput = (req, res, next) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+  const errors = [];
+
+  // 1. Mandatory Presence Check
+  if (!currentPassword) {
+    errors.push("Current password is required.");
+  }
+  if (!newPassword) {
+    errors.push("New password is required.");
+  }
+  if (!confirmPassword) {
+    errors.push("Confirm password is required.");
+  }
+
+  // If initial presence validation fails, respond immediately
+  if (errors.length > 0) {
+    return res.status(400).json({
+      status: false,
+      message: "Missing mandatory fields.",
+      errors
+    });
+  }
+
+  // 2. Identity Avoidance Check
+  if (req.user) {
+    const user = req.user;
+    const lowerPassword = newPassword.toLowerCase();
+    
+    if (user.username && lowerPassword.includes(user.username.toLowerCase())) {
+      errors.push("Password must not contain your username.");
+    }
+    if (user.email && lowerPassword.includes(user.email.split("@")[0].toLowerCase())) {
+      errors.push("Password must not contain parts of your email address.");
+    }
+    if (user.name && lowerPassword.includes(user.name.toLowerCase())) {
+      errors.push("Password must not contain your name.");
+    }
+  }
+
+  // 3. Equality Checks
+  if (newPassword === currentPassword) {
+    errors.push("New password must be different from your current password.");
+  }
+
+  if (newPassword !== confirmPassword) {
+    errors.push("New password and confirm password do not match.");
+  }
+
+  // 4. Complexity & Length Verification (NIST SP 800-63B standards)
+  if (newPassword.length < 8) {
+    errors.push("Password must be at least 8 characters long.");
+  }
+  if (newPassword.length > 64) {
+    errors.push("Password must not exceed 64 characters.");
+  }
+  
+  // Character diversity validation
+  if (!/[a-z]/.test(newPassword)) {
+    errors.push("Password must contain at least one lowercase letter.");
+  }
+  if (!/[A-Z]/.test(newPassword)) {
+    errors.push("Password must contain at least one uppercase letter.");
+  }
+  if (!/[0-9]/.test(newPassword)) {
+    errors.push("Password must contain at least one numeric digit.");
+  }
+  if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(newPassword)) {
+    errors.push("Password must contain at least one special character.");
+  }
+
+  // 5. Blocklist/Common Password Dictionary Lookup (Mock list representing top common passwords)
+  const commonPasswords = [
+    "password123", "12345678", "qwertyuiop", "letmein123", 
+    "welcome1", "admin123", "password!", "change_me"
+  ];
+  if (commonPasswords.includes(newPassword.toLowerCase())) {
+    errors.push("Password is too common and easily guessable. Please choose a more complex phrase.");
+  }
+
+  // 6. Return Errors or Proceed
+  if (errors.length > 0) {
+    SecurityLogger.logEvent("PASSWORD_VALIDATION_FAILED", {
+      userId: req.user ? req.user._id : "anonymous",
+      errors
+    }, "WARN");
+
+    return res.status(400).json({
+      status: false,
+      message: "Password complexity requirements not met.",
+      errors
+    });
+  }
