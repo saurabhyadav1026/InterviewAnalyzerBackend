@@ -2,8 +2,8 @@ import User from "../../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+const generateToken = (user) => {
+    return jwt.sign(user, process.env.JWT_SECRET, {
         expiresIn: "30d"
     });
 };
@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
             });
         }
 
-        const refreshToken = generateToken(user._id);
+        const refreshToken = generateToken({userId:user._id,role:user.role});
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
