@@ -173,3 +173,53 @@ import User from "../models/user.js";
  *               properties:
  *                 status:
  *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error during password reset."
+ */
+
+
+// =========================================================================
+// 2. SECURITY AUDIT LOGGER UTILITY
+// =========================================================================
+
+class SecurityLogger {
+  /**
+   * Safe JSON-based logger to record key authentication and credential change events.
+   * Ensures no passwords, hashes, or tokens are printed to the logs.
+   * 
+   * @param {string} event - The name of the event (e.g., 'PASSWORD_CHANGE_SUCCESS', 'RATE_LIMIT_TRIGGERED')
+   * @param {object} metadata - Extra details containing context like IP, User-Agent, user ID, etc.
+   * @param {string} severity - Severity level: 'INFO', 'WARN', 'ERROR', 'FATAL'
+   */
+  static logEvent(event, metadata = {}, severity = "INFO") {
+    const timestamp = new Date().toISOString();
+    
+    // Mask sensitive properties if they leak by accident
+    const sanitizedMetadata = { ...metadata };
+    const sensitiveKeys = ["password", "currentPassword", "newPassword", "confirmPassword", "token", "authHeader", "authorization"];
+    
+    for (const key of sensitiveKeys) {
+      if (sanitizedMetadata[key]) {
+        sanitizedMetadata[key] = "[MASKED]";
+      }
+    }
+
+    const logPayload = {
+      timestamp,
+      severity,
+      event,
+      details: sanitizedMetadata
+    };
+
+    const formattedLog = `[SECURITY AUDIT] ${JSON.stringify(logPayload)}`;
+
+    if (severity === "ERROR" || severity === "FATAL") {
+      console.error(formattedLog);
+    } else if (severity === "WARN") {
+      console.warn(formattedLog);
+    } else {
+      console.log(formattedLog);
+    }
+  }
