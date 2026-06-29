@@ -44,7 +44,7 @@ res.status(200).send({status:true,test})
 export default generateTest;
 
 
-const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
+export const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
 console.log(questions)
     try{
 const test=await Test.create({userId,subject:subjectId,questions})
@@ -62,9 +62,7 @@ return getTest(test._id);
 
 
 
-
-
-const getTest=async(testId)=>{
+export const getTest=async(testId)=>{
 
 const test = await Test.findById(testId)
     .populate('questions.question')
@@ -72,3 +70,4 @@ const test = await Test.findById(testId)
 
     return test;
 }
+

@@ -17,8 +17,8 @@ return sub;
 const v1AdminRoute =express.Router();
 
 
-v1AdminRoute.post("/question/add",addQuestion);
-v1AdminRoute.post("/question/update/:id",updateQuestion); 
+v1AdminRoute.post("/question/add",adminMiddleware,addQuestion);
+v1AdminRoute.post("/question/update/:id",adminMiddleware,updateQuestion); 
 v1AdminRoute.delete("/question/delete/:id",adminMiddleware,deleteQues)
 v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
 
