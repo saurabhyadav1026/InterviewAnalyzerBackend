@@ -11,7 +11,7 @@ const generateToken = (user) => {
 const loginUser = async (req, res) => {
     console.log("you will get loggin")
     try {
-        const { email, password } = req.body;
+        const {role, email, password } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({
@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
             });
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email,role });
 
         if (!user) {
             return res.status(401).json({
@@ -44,13 +44,17 @@ const loginUser = async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000
         });
 
-        res.status(200).json({
+        res.status(200).json(
+            {
+            status:true,user:{
             _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
             message: "Login successful"
-        });
+        }
+    }
+    );
 
     } catch (error) {
         console.error(error);

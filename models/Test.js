@@ -16,11 +16,8 @@ const testSchema=mongoose.Schema({
     answer:{
         type:String,
         default:null
-    },
-    isCorrect:{
-        type:Boolean,
-        default:null
     }
+   
 
 }],
 
