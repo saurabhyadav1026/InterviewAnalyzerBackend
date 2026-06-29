@@ -7,7 +7,7 @@ import Subject from "../../models/Subject.js";
 
 
 
-export const generateTest=async(req, res)=>{
+const generateTest=async(req, res)=>{
 
     try{
       const subjectId=new mongoose.Types.ObjectId(req.query.subjectId)
@@ -42,10 +42,10 @@ res.status(200).send({status:true,test})
 
 }
 
-// export default generateTest;
+export default generateTest;
 
 
-const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
+export const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
 console.log(questions)
     try{
 const test=await Test.create({userId,subject:subjectId,questions})
