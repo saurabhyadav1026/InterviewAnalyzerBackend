@@ -1031,3 +1031,186 @@ const cnQuestions = [
     about: "Selective Repeat ARQ"
   }
 ];
+
+const oopQuestions = [
+  {
+    question: "What is the main advantage of using Object Oriented Programming over Procedural Programming?",
+    questionImage: "",
+    options: ["Faster execution", "Better code reusability and maintenance", "Less memory usage", "Easier debugging"],
+    answer: "Better code reusability and maintenance",
+    topic: "OOP Concepts",
+    subjectId: "OOP001",
+    about: "OOP vs Procedural"
+  },
+  {
+    question: "Which of the following is not a pillar of Object Oriented Programming?",
+    questionImage: "",
+    options: ["Inheritance", "Polymorphism", "Encapsulation", "Recursion"],
+    answer: "Recursion",
+    topic: "OOP Concepts",
+    subjectId: "OOP001",
+    about: "OOP Pillars"
+  },
+  {
+    question: "Encapsulation helps in:",
+    questionImage: "",
+    options: ["Data hiding", "Code reusability", "Method overriding", "Dynamic binding"],
+    answer: "Data hiding",
+    topic: "Encapsulation",
+    subjectId: "OOP001",
+    about: "Encapsulation"
+  },
+  {
+    question: "The ability of an object to take many forms is known as:",
+    questionImage: "",
+    options: ["Inheritance", "Abstraction", "Polymorphism", "Encapsulation"],
+    answer: "Polymorphism",
+    topic: "Polymorphism",
+    subjectId: "OOP001",
+    about: "Polymorphism"
+  },
+  {
+    question: "Which keyword is used to inherit a class in Java?",
+    questionImage: "",
+    options: ["implements", "extends", "inherits", "super"],
+    answer: "extends",
+    topic: "Inheritance",
+    subjectId: "OOP001",
+    about: "Inheritance"
+  },
+  {
+    question: "Method Overloading is resolved at:",
+    questionImage: "",
+    options: ["Runtime", "Compile time", "Linking time", "Loading time"],
+    answer: "Compile time",
+    topic: "Polymorphism",
+    subjectId: "OOP001",
+    about: "Method Overloading"
+  },
+  {
+    question: "Method Overriding is resolved at:",
+    questionImage: "",
+    options: ["Compile time", "Runtime", "Both", "None"],
+    answer: "Runtime",
+    topic: "Polymorphism",
+    subjectId: "OOP001",
+    about: "Method Overriding"
+  },
+  {
+    question: "What is the purpose of a constructor in a class?",
+    questionImage: "",
+    options: ["To destroy an object", "To initialize an object", "To allocate memory", "To call static methods"],
+    answer: "To initialize an object",
+    topic: "OOP Basics",
+    subjectId: "OOP001",
+    about: "Constructor"
+  },
+  {
+    question: "An abstract class can contain:",
+    questionImage: "",
+    options: ["Only abstract methods", "Only concrete methods", "Both abstract and concrete methods", "Only static methods"],
+    answer: "Both abstract and concrete methods",
+    topic: "Abstraction",
+    subjectId: "OOP001",
+    about: "Abstract Class"
+  },
+  {
+    question: "Which access modifier is most restrictive?",
+    questionImage: "",
+    options: ["public", "protected", "default", "private"],
+    answer: "private",
+    topic: "OOP Concepts",
+    subjectId: "OOP001",
+    about: "Access Modifiers"
+  },
+  {
+    question: "'super' keyword is used to:",
+    questionImage: "",
+    options: ["Call parent class constructor", "Call current class method", "Access private members", "Create object"],
+    answer: "Call parent class constructor",
+    topic: "Inheritance",
+    subjectId: "OOP001",
+    about: "super Keyword"
+  },
+  {
+    question: "Composition represents ________ relationship between classes.",
+    questionImage: "",
+    options: ["Is-A", "Has-A", "Like-A", "Part-Of"],
+    answer: "Has-A",
+    topic: "OOP Concepts",
+    subjectId: "OOP001",
+    about: "Composition"
+  },
+  {
+    question: "Which of the following supports multiple inheritance in Java?",
+    questionImage: "",
+    options: ["Classes", "Interfaces", "Abstract Classes", "Final Classes"],
+    answer: "Interfaces",
+    topic: "Inheritance",
+    subjectId: "OOP001",
+    about: "Multiple Inheritance"
+  },
+  {
+    question: "A class cannot be declared as:",
+    questionImage: "",
+    options: ["Abstract", "Final", "Public", "Static"],
+    answer: "Static",
+    topic: "OOP Concepts",
+    subjectId: "OOP001",
+    about: "Class Modifiers"
+  },
+  {
+    question: "What is the default value of reference variable in Java?",
+    questionImage: "",
+    options: ["null", "0", "undefined", "garbage value"],
+    answer: "null",
+    topic: "OOP Basics",
+    subjectId: "OOP001",
+    about: "Reference Variable"
+  },
+  {
+    question: "Final method in a class can be:",
+    questionImage: "",
+    options: ["Overloaded", "Overridden", "Both", "None"],
+    answer: "Overloaded",
+    topic: "Polymorphism",
+    subjectId: "OOP001",
+    about: "final Keyword"
+  },
+  {
+    question: "Which concept is used to achieve runtime polymorphism?",
+    questionImage: "",
+    options: ["Method Overloading", "Method Overriding", "Operator Overloading", "Constructor Overloading"],
+    answer: "Method Overriding",
+    topic: "Polymorphism",
+    subjectId: "OOP001",
+    about: "Runtime Polymorphism"
+  },
+  {
+    question: "Interface in Java is used to achieve:",
+    questionImage: "",
+    options: ["Multiple Inheritance", "Data Hiding", "Encapsulation", "Abstraction"],
+    answer: "Multiple Inheritance",
+    topic: "Abstraction",
+    subjectId: "OOP001",
+    about: "Interface"
+  },
+  {
+    question: "this() and super() can be used in:",
+    questionImage: "",
+    options: ["Any method", "Only constructor", "Only static block", "Only main method"],
+    answer: "Only constructor",
+    topic: "OOP Basics",
+    subjectId: "OOP001",
+    about: "Constructor Chaining"
+  },
+  {
+    question: "Which principle says 'A class should have only one reason to change'?",
+    questionImage: "",
+    options: ["Single Responsibility Principle", "Open Closed Principle", "Liskov Substitution", "Dependency Inversion"],
+    answer: "Single Responsibility Principle",
+    topic: "OOP Design",
+    subjectId: "OOP001",
+    about: "SOLID Principle"
+  }
+];
