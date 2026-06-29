@@ -1,8 +1,8 @@
-import Test from "../../models/test.js";
+import Test from "../../models/Test.js";
 
-export const getTestHistory = async (req, res) => {
+const getTestHistory = async (req, res) => {
   try {
-    const userId = req.params.userId || req.query.userId || req.body.userId;
+    const userId = req.userId;
 
     if (!userId) {
       return res.status(400).json({
@@ -10,7 +10,7 @@ export const getTestHistory = async (req, res) => {
       });
     }
 
-    const history = await Test.find({ userid: userId }).sort({ _id: -1 });
+    const history = await Test.find({ userId: userId }).sort({ _id: -1 });
 
     if (!history || history.length === 0) {
       return res.status(404).json({
@@ -30,3 +30,6 @@ export const getTestHistory = async (req, res) => {
     });
   }
 };
+
+
+export default getTestHistory;

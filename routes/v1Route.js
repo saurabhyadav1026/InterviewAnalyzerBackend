@@ -4,6 +4,10 @@ import loginUser from "../controllers/student-controller/loginController.js";
 import getSubjectList from "../controllers/student-controller/getSubjectList.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import generateTest from "../controllers/student-controller/generateTest.js";
+import updateProfie from "../controllers/student-controller/updateProfile.js";
+import getTestHistory from "../controllers/student-controller/getTestHistory.js";
+import submitTest from "../controllers/student-controller/submitTest.js";
+
 
 const v1Route=express.Router();
 
@@ -12,11 +16,14 @@ const v1Route=express.Router();
 
 v1Route.post("/register", registerUser);
 v1Route.post("/login",authMiddleware, loginUser);
+v1Route.put("/updateProfile",updateProfie);
 
 
 
 v1Route.get("/getsubjects",getSubjectList)
 v1Route.get("/generateTest",generateTest)
+v1Route.post("/submitTest",submitTest)
+v1Route.get("testHistory",getTestHistory)
 
 
 
