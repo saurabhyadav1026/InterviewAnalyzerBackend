@@ -6,6 +6,9 @@ import v1Route from "./routes/v1Route.js";
 import v1AdminRoute from "./routes/v1AdminRoute.js";
 import dbconnect from "./config/db.js";
 import cookieParser from "cookie-parser";
+import adminAuth from "./middlewares/adminAuth.js";
+import userAuth from "./middlewares/userAuth.js";
+import userRoute from "./routes/userRoute.js";
 
 
 const app = express();
@@ -47,8 +50,9 @@ try {
     console.log("Using fallback mongo connection");
 }
 
-app.use("/api/v1", v1Route);
-app.use("/api/admin/v1",v1AdminRoute)
+app.use('api/v1/user',userRoute)
+app.use("/api/v1", userAuth, v1Route);
+app.use("/api/admin/v1",adminAuth,v1AdminRoute)
 
 
 

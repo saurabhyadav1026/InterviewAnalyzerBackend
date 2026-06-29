@@ -1,4 +1,4 @@
-const adminMiddleware = (req, res, next) => {
+const adminAuth = (req, res, next) => {
 
   if (!req.user) {
     return res.status(401).json({
@@ -15,4 +15,4 @@ const adminMiddleware = (req, res, next) => {
   next();
 };
 
-export default adminMiddleware;
+export default adminAuth;

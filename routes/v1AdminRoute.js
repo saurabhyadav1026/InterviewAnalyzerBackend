@@ -1,6 +1,6 @@
 import express from "express";
 import {addQuestion,deleteQues,updateQuestion} from "../controllers/admin-controller/questionController.js"
-import adminMiddleware from "../middlewares/adminMiddleware.js";
+import adminMiddleware from "../middlewares/adminAuth.js";
 import Subject from "../models/Subject.js";
 import Question from "../models/Question.js";
 import dsaQuestion from "../Questions/dsaQuestion.js";
