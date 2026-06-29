@@ -12,7 +12,7 @@ v1Route.get("/hello",(req,res)=>{
 })
 
 v1Route.post("/register", registerUser);
-v1Route.post("/login", loginUser);
+v1Route.post("/login",authMiddleware, loginUser);
 
 v1Route.get("/getsubjects",getSubjectList)
 
