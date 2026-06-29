@@ -223,3 +223,63 @@ class SecurityLogger {
       console.log(formattedLog);
     }
   }
+}
+
+
+// =========================================================================
+// 3. CUSTOM SLIDING WINDOW RATE LIMITER CLASS
+// =========================================================================
+
+class SlidingWindowRateLimiter {
+  /**
+   * Constructs an in-memory Sliding Window Rate Limiter.
+   * Multi-dimensional: limits requests by both IP address and User Identity (email/id).
+   * 
+   * @param {number} windowMs - Time window size in milliseconds
+   * @param {number} maxIpRequests - Maximum requests allowed per IP address in windowMs
+   * @param {number} maxUserRequests - Maximum requests allowed per User ID in windowMs
+   * @param {number} cleanupIntervalMs - Interval to run garbage collection to delete expired windows (prevents memory leak)
+   */
+  constructor(windowMs = 15 * 60 * 1000, maxIpRequests = 5, maxUserRequests = 3, cleanupIntervalMs = 5 * 60 * 1000) {
+    this.windowMs = windowMs;
+    this.maxIpRequests = maxIpRequests;
+    this.maxUserRequests = maxUserRequests;
+    
+    // Maps storing timestamp arrays
+    // Key format: 'ip:<ip_address>' or 'user:<user_id>'
+    this.store = new Map();
+    
+    // IP Blocklist for temporary block after repeated violations
+    this.blocklist = new Map();
+    this.blockDurationMs = 30 * 60 * 1000; // 30 minutes ban for extreme spamming
+
+    // Start background garbage collector
+    this.gcTimer = setInterval(() => this.cleanup(), cleanupIntervalMs);
+    if (this.gcTimer.unref) {
+      this.gcTimer.unref(); // Allow process to exit cleanly in testing environment
+    }
+  }
+
+  /**
+   * Cleans up expired timestamps in the store to free up memory.
+   */
+  cleanup() {
+    const now = Date.now();
+    const expiryTime = now - this.windowMs;
+
+    for (const [key, timestamps] of this.store.entries()) {
+      const validTimestamps = timestamps.filter(ts => ts > expiryTime);
+      if (validTimestamps.length === 0) {
+        this.store.delete(key);
+      } else {
+        this.store.set(key, validTimestamps);
+      }
+    }
+
+    // Clean blocklist
+    for (const [ip, blockExpires] of this.blocklist.entries()) {
+      if (now > blockExpires) {
+        this.blocklist.delete(ip);
+        SecurityLogger.logEvent("IP_BLOCK_EXPIRED", { ip }, "INFO");
+      }
+    }
