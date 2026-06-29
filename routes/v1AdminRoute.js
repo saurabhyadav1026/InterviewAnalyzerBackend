@@ -4,6 +4,7 @@ import adminMiddleware from "../middlewares/adminMiddleware.js";
 import Subject from "../models/Subject.js";
 import Question from "../models/Question.js";
 import dsaQuestion from "../Questions/dsaQuestion.js";
+import getUsersByDateRange from "../controllers/admin-controller/getUserBydate.js";
 
 const AddSub= async () => {
 
@@ -19,6 +20,7 @@ const v1AdminRoute =express.Router();
 v1AdminRoute.post("/question/add",adminMiddleware,addQuestion);
 v1AdminRoute.post("/question/update/:id",adminMiddleware,updateQuestion); 
 v1AdminRoute.delete("/question/delete/:id",adminMiddleware,deleteQues)
+v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
 
 
 v1AdminRoute.get("/addsub",async(req,res)=>{

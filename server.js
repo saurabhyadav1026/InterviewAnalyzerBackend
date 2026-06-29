@@ -7,11 +7,11 @@ import v1AdminRoute from "./routes/v1AdminRoute.js";
 import dbconnect from "./config/db.js";
 import cookieParser from "cookie-parser";
 
-app.use(cookieParser());
 
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 
