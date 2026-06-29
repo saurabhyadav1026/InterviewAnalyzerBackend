@@ -1,165 +1,32 @@
-const dsaQuestion=[
+ const dsaQuestion= [
   {
-    "question": "Which data structure follows the LIFO principle?",
-    "options": ["Queue", "Stack", "Linked List", "Tree"],
-    "answer": "Stack",
-    "topic": "Stack",
-    "subjectId": "DSA001",
-    "about": "Stack follows Last In First Out (LIFO) order where the last inserted element is removed first."
+    question: "Which data structure follows the LIFO principle?",
+    options: ["Queue", "Stack", "Linked List", "Tree"],
+    answer: "Stack",
+    topic: "Stack",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about:
+      "Stack follows Last In First Out (LIFO) order where the last inserted element is removed first."
   },
   {
-    "question": "Which data structure follows the FIFO principle?",
-    "options": ["Stack", "Queue", "Tree", "Graph"],
-    "answer": "Queue",
-    "topic": "Queue",
-    "subjectId": "DSA001",
-    "about": "Queue follows First In First Out (FIFO) order where the first inserted element is removed first."
+    question: "Which data structure follows the FIFO principle?",
+    options: ["Stack", "Queue", "Tree", "Graph"],
+    answer: "Queue",
+    topic: "Queue",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about:
+      "Queue follows First In First Out (FIFO) order where the first inserted element is removed first."
   },
   {
-    "question": "What is the time complexity of Binary Search?",
-    "options": ["O(n)", "O(log n)", "O(n²)", "O(1)"],
-    "answer": "O(log n)",
-    "topic": "Searching",
-    "subjectId": "DSA001",
-    "about": "Binary Search repeatedly divides the search space into halves."
-  },
-  {
-    "question": "Which sorting algorithm has the best average-case complexity among the following?",
-    "options": ["Bubble Sort", "Selection Sort", "Merge Sort", "Insertion Sort"],
-    "answer": "Merge Sort",
-    "topic": "Sorting",
-    "subjectId": "DSA001",
-    "about": "Merge Sort has an average and worst-case time complexity of O(n log n)."
-  },
-  {
-    "question": "Which tree traversal visits the root node first?",
-    "options": ["Inorder", "Postorder", "Preorder", "Level Order"],
-    "answer": "Preorder",
-    "topic": "Tree",
-    "subjectId": "DSA001",
-    "about": "Preorder traversal follows Root → Left → Right."
-  },
-  {
-    "question": "Which data structure is used in Breadth First Search (BFS)?",
-    "options": ["Stack", "Queue", "Array", "Linked List"],
-    "answer": "Queue",
-    "topic": "Graph",
-    "subjectId": "DSA001",
-    "about": "BFS explores nodes level by level using a queue."
-  },
-  {
-    "question": "Which data structure is used in Depth First Search (DFS)?",
-    "options": ["Queue", "Array", "Stack", "Heap"],
-    "answer": "Stack",
-    "topic": "Graph",
-    "subjectId": "DSA001",
-    "about": "DFS explores as deep as possible before backtracking using a stack."
-  },
-  {
-    "question": "What is the worst-case time complexity of Quick Sort?",
-    "options": ["O(n log n)", "O(log n)", "O(n²)", "O(n)"],
-    "answer": "O(n²)",
-    "topic": "Sorting",
-    "subjectId": "DSA001",
-    "about": "Quick Sort reaches O(n²) when poor pivot selection occurs repeatedly."
-  },
-  {
-    "question": "Which of the following is not a linear data structure?",
-    "options": ["Array", "Queue", "Stack", "Tree"],
-    "answer": "Tree",
-    "topic": "Data Structures",
-    "subjectId": "DSA001",
-    "about": "Tree is a hierarchical, non-linear data structure."
-  },
-  {
-    "question": "What is the height of a tree with only one node?",
-    "options": ["0", "1", "2", "-1"],
-    "answer": "0",
-    "topic": "Tree",
-    "subjectId": "DSA001",
-    "about": "A single-node tree has height 0 because there are no edges below the root."
-  },
-  {
-    "question": "Which searching technique requires the data to be sorted?",
-    "options": ["Linear Search", "Binary Search", "Hashing", "DFS"],
-    "answer": "Binary Search",
-    "topic": "Searching",
-    "subjectId": "DSA001",
-    "about": "Binary Search only works efficiently on sorted data."
-  },
-  {
-    "question": "What is the time complexity of accessing an element in an array by index?",
-    "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"],
-    "answer": "O(1)",
-    "topic": "Array",
-    "subjectId": "DSA001",
-    "about": "Arrays provide constant-time random access using indices."
-  },
-  {
-    "question": "Which sorting algorithm repeatedly swaps adjacent elements if they are in the wrong order?",
-    "options": ["Merge Sort", "Quick Sort", "Bubble Sort", "Heap Sort"],
-    "answer": "Bubble Sort",
-    "topic": "Sorting",
-    "subjectId": "DSA001",
-    "about": "Bubble Sort compares and swaps adjacent elements repeatedly."
-  },
-  {
-    "question": "Which data structure is primarily used to implement recursion?",
-    "options": ["Queue", "Stack", "Tree", "Graph"],
-    "answer": "Stack",
-    "topic": "Stack",
-    "subjectId": "DSA001",
-    "about": "Recursive function calls are managed through the call stack."
-  },
-  {
-    "question": "Which of the following is a self-balancing Binary Search Tree?",
-    "options": ["AVL Tree", "Binary Tree", "Complete Tree", "Heap"],
-    "answer": "AVL Tree",
-    "topic": "Tree",
-    "subjectId": "DSA001",
-    "about": "AVL Trees maintain balance by performing rotations after insertions and deletions."
-  },
-  {
-    "question": "What is the maximum number of children a node in a binary tree can have?",
-    "options": ["1", "2", "3", "Unlimited"],
-    "answer": "2",
-    "topic": "Tree",
-    "subjectId": "DSA001",
-    "about": "A binary tree node can have at most two children."
-  },
-  {
-    "question": "Which graph traversal algorithm uses a queue for processing nodes?",
-    "options": ["DFS", "BFS", "Dijkstra", "Prim"],
-    "answer": "BFS",
-    "topic": "Graph",
-    "subjectId": "DSA001",
-    "about": "BFS uses a queue to visit nodes level by level."
-  },
-  {
-    "question": "What is the average time complexity of appending an element to a dynamic array?",
-    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
-    "answer": "O(1)",
-    "topic": "Array",
-    "subjectId": "DSA001",
-    "about": "Appending to a dynamic array is amortized O(1)."
-  },
-  {
-    "question": "Which data structure is commonly used to implement a Priority Queue?",
-    "options": ["Linked List", "Stack", "Heap", "Array"],
-    "answer": "Heap",
-    "topic": "Heap",
-    "subjectId": "DSA001",
-    "about": "Heaps efficiently support insertion and removal of the highest-priority element."
-  },
-  {
-    "question": "Which algorithm is commonly used to find the shortest path in a weighted graph with non-negative weights?",
-    "options": ["DFS", "BFS", "Dijkstra's Algorithm", "Binary Search"],
-    "answer": "Dijkstra's Algorithm",
-    "topic": "Graph",
-    "subjectId": "DSA001",
-    "about": "Dijkstra's Algorithm finds the shortest path from a source vertex to all other vertices."
+    question: "What is the time complexity of Binary Search?",
+    options: ["O(n)", "O(log n)", "O(n²)", "O(1)"],
+    answer: "O(log n)",
+    topic: "Searching",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about:
+      "Binary Search repeatedly divides the search space into halves."
   }
-]
+];
 const apptiQuestion=[
   {
     "question": "What is 25% of 200?",
@@ -1031,3 +898,190 @@ const cnQuestions = [
     about: "Selective Repeat ARQ"
   }
 ];
+
+const oopQuestions = [
+  {
+    question: "What is the main advantage of using Object Oriented Programming over Procedural Programming?",
+    questionImage: "",
+    options: ["Faster execution", "Better code reusability and maintenance", "Less memory usage", "Easier debugging"],
+    answer: "Better code reusability and maintenance",
+    topic: "OOP Concepts",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "OOP vs Procedural"
+  },
+  {
+    question: "Which of the following is not a pillar of Object Oriented Programming?",
+    questionImage: "",
+    options: ["Inheritance", "Polymorphism", "Encapsulation", "Recursion"],
+    answer: "Recursion",
+    topic: "OOP Concepts",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "OOP Pillars"
+  },
+  {
+    question: "Encapsulation helps in:",
+    questionImage: "",
+    options: ["Data hiding", "Code reusability", "Method overriding", "Dynamic binding"],
+    answer: "Data hiding",
+    topic: "Encapsulation",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Encapsulation"
+  },
+  {
+    question: "The ability of an object to take many forms is known as:",
+    questionImage: "",
+    options: ["Inheritance", "Abstraction", "Polymorphism", "Encapsulation"],
+    answer: "Polymorphism",
+    topic: "Polymorphism",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Polymorphism"
+  },
+  {
+    question: "Which keyword is used to inherit a class in Java?",
+    questionImage: "",
+    options: ["implements", "extends", "inherits", "super"],
+    answer: "extends",
+    topic: "Inheritance",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Inheritance"
+  },
+  {
+    question: "Method Overloading is resolved at:",
+    questionImage: "",
+    options: ["Runtime", "Compile time", "Linking time", "Loading time"],
+    answer: "Compile time",
+    topic: "Polymorphism",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Method Overloading"
+  },
+  {
+    question: "Method Overriding is resolved at:",
+    questionImage: "",
+    options: ["Compile time", "Runtime", "Both", "None"],
+    answer: "Runtime",
+    topic: "Polymorphism",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Method Overriding"
+  },
+  {
+    question: "What is the purpose of a constructor in a class?",
+    questionImage: "",
+    options: ["To destroy an object", "To initialize an object", "To allocate memory", "To call static methods"],
+    answer: "To initialize an object",
+    topic: "OOP Basics",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Constructor"
+  },
+  {
+    question: "An abstract class can contain:",
+    questionImage: "",
+    options: ["Only abstract methods", "Only concrete methods", "Both abstract and concrete methods", "Only static methods"],
+    answer: "Both abstract and concrete methods",
+    topic: "Abstraction",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Abstract Class"
+  },
+  {
+    question: "Which access modifier is most restrictive?",
+    questionImage: "",
+    options: ["public", "protected", "default", "private"],
+    answer: "private",
+    topic: "OOP Concepts",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Access Modifiers"
+  },
+  {
+    question: "'super' keyword is used to:",
+    questionImage: "",
+    options: ["Call parent class constructor", "Call current class method", "Access private members", "Create object"],
+    answer: "Call parent class constructor",
+    topic: "Inheritance",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "super Keyword"
+  },
+  {
+    question: "Composition represents ________ relationship between classes.",
+    questionImage: "",
+    options: ["Is-A", "Has-A", "Like-A", "Part-Of"],
+    answer: "Has-A",
+    topic: "OOP Concepts",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Composition"
+  },
+  {
+    question: "Which of the following supports multiple inheritance in Java?",
+    questionImage: "",
+    options: ["Classes", "Interfaces", "Abstract Classes", "Final Classes"],
+    answer: "Interfaces",
+    topic: "Inheritance",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Multiple Inheritance"
+  },
+  {
+    question: "A class cannot be declared as:",
+    questionImage: "",
+    options: ["Abstract", "Final", "Public", "Static"],
+    answer: "Static",
+    topic: "OOP Concepts",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Class Modifiers"
+  },
+  {
+    question: "What is the default value of reference variable in Java?",
+    questionImage: "",
+    options: ["null", "0", "undefined", "garbage value"],
+    answer: "null",
+    topic: "OOP Basics",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Reference Variable"
+  },
+  {
+    question: "Final method in a class can be:",
+    questionImage: "",
+    options: ["Overloaded", "Overridden", "Both", "None"],
+    answer: "Overloaded",
+    topic: "Polymorphism",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "final Keyword"
+  },
+  {
+    question: "Which concept is used to achieve runtime polymorphism?",
+    questionImage: "",
+    options: ["Method Overloading", "Method Overriding", "Operator Overloading", "Constructor Overloading"],
+    answer: "Method Overriding",
+    topic: "Polymorphism",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Runtime Polymorphism"
+  },
+  {
+    question: "Interface in Java is used to achieve:",
+    questionImage: "",
+    options: ["Multiple Inheritance", "Data Hiding", "Encapsulation", "Abstraction"],
+    answer: "Multiple Inheritance",
+    topic: "Abstraction",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Interface"
+  },
+  {
+    question: "this() and super() can be used in:",
+    questionImage: "",
+    options: ["Any method", "Only constructor", "Only static block", "Only main method"],
+    answer: "Only constructor",
+    topic: "OOP Basics",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "Constructor Chaining"
+  },
+  {
+    question: "Which principle says 'A class should have only one reason to change'?",
+    questionImage: "",
+    options: ["Single Responsibility Principle", "Open Closed Principle", "Liskov Substitution", "Dependency Inversion"],
+    answer: "Single Responsibility Principle",
+    topic: "OOP Design",
+    subjectId: "6a420eaa8f29afff89fc4071",
+    about: "SOLID Principle"
+  }
+];
+
+
+
+export default oopQuestions;
