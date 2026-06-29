@@ -1,7 +1,7 @@
-import Question from '../models/questionModel.js'
-
-export const addMCQ = async (req, res) => {
+import Question from '../../models/Question.js'
+export const addQuestion = async (req, res) => {
   try {
+    const { question, options, answer, topic, subjectId, about="" } = req.body;
 
     const { question } = req.body;
 
@@ -13,7 +13,14 @@ export const addMCQ = async (req, res) => {
       });
     }
 
-    const newQuestion = await Question.create(req.body);
+    await Question.create({
+      question,
+      options,
+      answer,
+      topic,
+      subjectId,
+      about
+    });
 
     res.status(201).json({
       message: "Question added successfully"
@@ -26,28 +33,27 @@ export const addMCQ = async (req, res) => {
   }
 };
 
-export const updateQues = async(req,res)=>{
+export const updateQuestion = async(req,res)=>{
     try {
       const updatedMCQ =
         await Question.findByIdAndUpdate(
-          req.params.id,
-          {
+          req.params._id,
+         {
             question:
               req.body.question,
-            options:
-              req.body.options,
+            options:  req.body.options,
             answer:
               req.body.answer,
             topic:
-              req.body.topic,
+              req.body.explanation,
             subjectId:
               req.body.subjectId,
             about:
-              req.body.about  
-          },
-          {
-            new: true,
+              req.body.about    
+          },{
+            new:true
           }
+          
         );
 
       if (!updatedMCQ) {
