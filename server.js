@@ -17,7 +17,11 @@ import Question from "./models/Question.js";
 const app = express();
 console.log( process.env.OfflineUrl)
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.ONLINE_URL,
+  methods: ["GET", 'POST', "PUT", "DELETE"],
+  credentials: true
+}));
 
 
 app.use(cookieParser());
