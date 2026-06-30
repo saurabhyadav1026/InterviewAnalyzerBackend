@@ -9,13 +9,9 @@ import cookieParser from "cookie-parser";
 import adminAuth from "./middlewares/adminAuth.js";
 import userAuth from "./middlewares/userAuth.js";
 import userRoute from "./routes/userRoute.js";
-import {dsaMcqs} from "./Questions/dsaQuestion.js"
-import Question from "./models/Question.js";
-
 
 
 const app = express();
-console.log( process.env.OfflineUrl)
 
 app.use(cors({
   origin: process.env.ONLINE_URL,
@@ -27,21 +23,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-
-
-/* function(origin, callback) {
-        const allowedOrigins = [
-            process.env.OfflineUrl,
-            process.env.OnlineUrl
-        ];
-
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            console.log("Blocked by CORS:", origin);
-            callback(new Error("Not allowed by CORS"));
-        }
-    } */
 
 
 
@@ -59,13 +40,14 @@ app.use("/api/v1", userAuth, v1Route);
 app.use("/api/admin/v1",adminAuth,v1AdminRoute)
 
 
-app.get("/addsub",async(req,res)=>{
-  //const subject= await Subject.create({name:"DSA"})
+/* app.get("/addsub",async(req,res)=>{
+   const subject= await Subject.create({name:"Web Development"});
+   res.send(subject);
   const question= await Question.insertMany(dsaMcqs)
-    res.send(question[0])
+   res.send(question[0])
 
 })
-
+ */
 
 
 

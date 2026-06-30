@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 export const logoutUser = async (req, res) =>
      {
     try {
-const refreshTokenFromBody = req.body ? req.body.refreshToken : null;
 
 
         const cookieOptions= {

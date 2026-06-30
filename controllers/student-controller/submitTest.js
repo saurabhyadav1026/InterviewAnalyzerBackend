@@ -11,10 +11,10 @@ const submitTest=async(req,res)=>{
     try{
         const {testId,questions}=req.body;
       
-await Test.findOneAndUpdate({_id:testId},{$set:{questions,endTime:Date.now()}});
+
+const test=await Test.findOneAndUpdate({_id:testId},{$set:{questions,endTime:Date.now()}});
 
 
-const test= await Test.findById(testId,{_id:-1,_v:-1});
 const aiAnalysis=await getAiAnalysis(test.questions);
 
 if(aiAnalysis.status){ await Test.findOneAndUpdate({_id:testId},{$set:{aiAnalysis:aiAnalysis.report}});
@@ -39,7 +39,7 @@ const getAiAnalysis=async(questions)=>{
 
 
   try {
-    console.log(questions)
+   
     const  message  = JSON.stringify(questions,null,2)  //req.query;
     console.log(message)
 

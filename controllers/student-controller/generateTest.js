@@ -45,10 +45,10 @@ export default generateTest;
 
 
 export const addAndGetTest=async(userId,subjectId,questions)=>{
-console.log(questions)
+
     try{
 const test=await Test.create({userId,subject:subjectId,questions})
-console.log(test)
+
 return getTest(test._id);
 
     }catch(err){

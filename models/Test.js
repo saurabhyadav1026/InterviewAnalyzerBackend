@@ -30,7 +30,7 @@ const testSchema=mongoose.Schema({
         default:null
     },
     aiAnalysis:{
-        type:String,
+        type:Object,
         default:null
     }
 })

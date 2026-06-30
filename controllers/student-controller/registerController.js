@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: "Request body is missing. Ensure you are sending JSON." });
         }
         
-        const { name, email, password } = req.body;
+        const { role,name, email, password } = req.body;
 
         if (!name || !email || !password) {
             return res.status(400).json({ message: "Please provide all required fields" });
@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: "User with that email or  already exists" });
         }
 
-        const user = await User.create({  name, email, password });
+        const user = await User.create({  role,name, email, password });
 
         if (user) {
             res.status(201).json({status:true,msg:"Register successfully"});
