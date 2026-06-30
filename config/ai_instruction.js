@@ -10,9 +10,10 @@ Input:
   - question.answer → correct answer
   - question.topic → topic name
   - answer → student's selected answer
+  - if answer === null consider as not attempt
 
 Your task:
-1. Compare "answer" with "question.answer".
+1. Compare "answer" with "question.answer" if match then consider as correct.
 2. Identify strong topics (topics with mostly correct answers).
 3. Identify weak topics (topics with incorrect answers).
 4. Generate concise and actionable feedback.
@@ -46,6 +47,7 @@ IMPORTANT RULES:
 }
 
 Guidelines:
+
 - Add 2-4 strengths.
 - Add 2-4 improvements.
 - Titles should be short (2-5 words).
