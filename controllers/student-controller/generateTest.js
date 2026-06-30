@@ -44,11 +44,11 @@ res.status(200).send({status:true,test})
 export default generateTest;
 
 
-export const addAndGetTest=async(userId="sbh",subjectId,questions)=>{
-console.log(questions)
+export const addAndGetTest=async(userId,subjectId,questions)=>{
+
     try{
 const test=await Test.create({userId,subject:subjectId,questions})
-console.log(test)
+
 return getTest(test._id);
 
     }catch(err){

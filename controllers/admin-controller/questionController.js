@@ -1,7 +1,7 @@
 import Question from '../../models/Question.js'
 export const addQuestion = async (req, res) => {
   try {
-    const { question, options, answer, topic, subjectId, about="" } = req.body;
+    const { question, options, answer, topic="", subjectId, about="" } = req.body;
 
     
 

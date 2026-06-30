@@ -2,6 +2,7 @@ import Test from "../../models/Test.js";
 
 const getTestHistory = async (req, res) => {
   try {
+    
     const userId = req.userId;
 
     if (!userId) {
@@ -13,7 +14,8 @@ const getTestHistory = async (req, res) => {
     const history = await Test.find({ userId: userId }).sort({ _id: -1 });
 
     if (!history || history.length === 0) {
-      return res.status(404).json({
+      return res.status(200).json({
+        history:[],
         message: "No test history found for this user",
       });
     }

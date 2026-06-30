@@ -16,11 +16,8 @@ const testSchema=mongoose.Schema({
     answer:{
         type:String,
         default:null
-    },
-    isCorrect:{
-        type:Boolean,
-        default:null
     }
+   
 
 }],
 
@@ -33,7 +30,7 @@ const testSchema=mongoose.Schema({
         default:null
     },
     aiAnalysis:{
-        type:String,
+        type:Object,
         default:null
     }
 })
