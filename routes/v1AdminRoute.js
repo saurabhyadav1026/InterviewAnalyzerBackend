@@ -3,7 +3,7 @@ import {addQuestion,deleteQues,updateQuestion} from "../controllers/admin-contro
 import adminMiddleware from "../middlewares/adminAuth.js";
 import Subject from "../models/Subject.js";
 import getUsersByDateRange from "../controllers/admin-controller/getUserBydate.js";
-
+import { generateTest } from "../controllers/admin-controller/createTest.js";
 const AddSub= async () => {
 
   const sub =await Subject.create({name:"DSA"});
@@ -19,7 +19,7 @@ v1AdminRoute.post("/addQuestion",adminMiddleware,addQuestion);
 v1AdminRoute.post("/updateQuestion/:id",adminMiddleware,updateQuestion); 
 v1AdminRoute.delete("/deleteQuestion/:id",adminMiddleware,deleteQues)
 v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
-
+v1AdminRoute.get("/test/generatetest",generateTest)
 
 
 
