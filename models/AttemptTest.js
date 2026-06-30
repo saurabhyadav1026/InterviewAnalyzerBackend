@@ -40,7 +40,11 @@ endAt:{
     required: true },
   answer:{type:String,default:null}
   }
-  ]
+  ],
+  aiAnalysis:{
+    type:Object,
+    default:null
+  }
   
 }, { timestamps: true });
 
