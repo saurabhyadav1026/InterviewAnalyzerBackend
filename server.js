@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import adminAuth from "./middlewares/adminAuth.js";
 import userAuth from "./middlewares/userAuth.js";
 import userRoute from "./routes/userRoute.js";
+import verifyme from "./controllers/user-controller/verifyme.js";
 
 
 const app = express();
@@ -42,7 +43,7 @@ app.use('/user',userRoute)
 app.use("/student", userAuth, v1Route);
 app.use("/admin",adminAuth,v1AdminRoute)
 
-
+app.get("/verifyme", userAuth,verifyme);
 
 /* app.get("/addsub",async(req,res)=>{
    const subject= await Subject.create({name:"Web Development"});

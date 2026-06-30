@@ -6,6 +6,7 @@ import updateProfie from "../controllers/user-controller/updateProfile.js";
 
 const userRoute=express.Router();
 
+
 userRoute.post("/register", registerController);
 userRoute.post("/login", loginUser);
 userRoute.get("/logout",logoutUser);
