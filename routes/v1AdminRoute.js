@@ -5,7 +5,7 @@ import Subject from "../models/Subject.js";
 import Question from "../models/Question.js";
 import dsaQuestion from "../Questions/dsaQuestion.js";
 import getUsersByDateRange from "../controllers/admin-controller/getUserBydate.js";
-
+import { generateTest } from "../controllers/admin-controller/createTest.js";
 const AddSub= async () => {
 
   const sub =await Subject.create({name:"DSA"});
@@ -21,7 +21,7 @@ v1AdminRoute.post("/question/add",adminMiddleware,addQuestion);
 v1AdminRoute.post("/question/update/:id",adminMiddleware,updateQuestion); 
 v1AdminRoute.delete("/question/delete/:id",adminMiddleware,deleteQues)
 v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
-
+v1AdminRoute.get("/test/generatetest",generateTest)
 
 v1AdminRoute.get("/addsub",async(req,res)=>{
     const question= await Question.insertMany(dsaQuestion)
