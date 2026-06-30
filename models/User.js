@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
-    rollNo: {
+    rollno: {
       type: String,
       required: true,
       unique: true,
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true,
-      minlength: 6,
+      
     },
      role: {
         type: String,

@@ -11,8 +11,8 @@ const generateToken = (user) => {
 const loginUser = async (req, res) => {
     console.log("Login attempt initiated");
     try {
-        const { identifier, password } = req.body;
-
+        const { email, password } = req.query;
+const identifier =email;
         // Ab 'role' yahan mandatory nahi hai
         if (!identifier || !password) {
             return res.status(400).json({
@@ -59,12 +59,12 @@ const loginUser = async (req, res) => {
         res.status(200).json({
             status: true,
             user: {
-                _id: user._id,
+                   _id: user._id,
                 rollno:user.rollno,
-                name:user.name,
+                  name:user.name,
                 branch:user.branch,
-                passingyear:user.passingyear,
-                email:user.email
+           passingyear:user.passingyear,
+                 email:user.email
 
             },
             message: "Login successful"

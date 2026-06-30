@@ -41,6 +41,11 @@ endAt:{
   answer:{type:String,default:null}
   }
   ],
+  correctAnswers:{
+    type:Number,
+    default:null
+
+  },
   aiAnalysis:{
     type:Object,
     default:null

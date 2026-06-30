@@ -6,6 +6,9 @@ import updateProfie from "../controllers/user-controller/updateProfile.js";
 
 const userRoute=express.Router();
 
+userRoute.get("/kk",(req,res)=>{
+    res.send("hello bhai")
+})
 
 userRoute.post("/register", registerController);
 userRoute.get("/login", loginUser);

@@ -26,7 +26,7 @@ const v1AdminRoute =express.Router();
 //  v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
 
 
-v1AdminRoute.get("/generateTest",createTest);
+v1AdminRoute.post("/generateTest",createTest);
 v1AdminRoute.get("/checkResult",getTestReport);
 v1AdminRoute.get("/getConductedTest",getConductedTest);
 
