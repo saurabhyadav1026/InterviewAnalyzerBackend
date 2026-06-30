@@ -17,8 +17,15 @@ import Question from "./models/Question.js";
 const app = express();
 console.log( process.env.OfflineUrl)
 
-app.use(cors({
-    origin: function(origin, callback) {
+app.use(cors());
+
+
+app.use(cookieParser());
+app.use(express.json());
+
+
+
+/* function(origin, callback) {
         const allowedOrigins = [
             process.env.OfflineUrl,
             process.env.OnlineUrl
@@ -30,17 +37,7 @@ app.use(cors({
             console.log("Blocked by CORS:", origin);
             callback(new Error("Not allowed by CORS"));
         }
-    },
-    credentials: true
-}));
-
-
-app.use(cookieParser());
-app.use(express.json());
-
-
-
-
+    } */
 
 
 
