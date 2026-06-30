@@ -36,8 +36,12 @@ try {
 }
 
 app.use('/user',userRoute)
-app.use("/api/v1", userAuth, v1Route);
-app.use("/api/admin/v1",adminAuth,v1AdminRoute)
+//app.use("/api/v1", userAuth, v1Route);
+//app.use("/api/admin/v1",adminAuth,v1AdminRoute)
+
+app.use("/student", userAuth, v1Route);
+app.use("/admin",adminAuth,v1AdminRoute)
+
 
 
 /* app.get("/addsub",async(req,res)=>{
@@ -48,6 +52,7 @@ app.use("/api/admin/v1",adminAuth,v1AdminRoute)
 
 })
  */
+
 
 
 

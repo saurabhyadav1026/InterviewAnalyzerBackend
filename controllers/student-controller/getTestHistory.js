@@ -1,4 +1,4 @@
-import Test from "../../models/Test.js";
+import Test from "../../models/PraticeTest.js";
 
 const getTestHistory = async (req, res) => {
   try {

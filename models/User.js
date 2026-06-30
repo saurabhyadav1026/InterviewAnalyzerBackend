@@ -2,31 +2,52 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
-  
+    rollNo: {
+      type: String,
+      required: true,
+      unique: true,
+   
+    },
+
     name: {
-        type: String,
-        required: [true, "Name is required"],
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
+
+    branch: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    passingYear: {
+      type: Number,
+      required: true,
+    },
+
+
     email: {
-        type: String,
-        required: [true, "Email is required"],
-        unique: true,
-        lowercase: true,
-        trim: true,
-        match: [/^\S+@\S+\.\S+$/, "Please use a valid email address"]
+      type: String,
+      required: true,
+   
     },
+
+
     password: {
-        type: String,
-        required: [true, "Password is required"],
-       
+      type: String,
+      required: true,
+      minlength: 6,
     },
-    role: {
+     role: {
         type: String,
         enum: ["user", "admin"],
         default: "user"
     }
-}, { timestamps: true });
+  },
+  {
+    timestamps: true,
+  });
 
 userSchema.pre("save", async function() {
     if (!this.isModified("password")) {

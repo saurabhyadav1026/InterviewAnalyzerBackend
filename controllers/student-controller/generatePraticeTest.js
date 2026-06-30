@@ -1,12 +1,12 @@
 
 import mongoose from "mongoose";
 import Question from "../../models/Question.js";
-import Test from "../../models/Test.js"
+import Test from "../../models/PraticeTest.js"
 
 
 
 
-const generateTest=async(req, res)=>{
+const generatePraticeTest=async(req, res)=>{
 
     try{
       const subjectId=new mongoose.Types.ObjectId(req.query.subjectId)
@@ -41,7 +41,7 @@ res.status(200).send({status:true,test})
 
 }
 
-export default generateTest;
+export default generatePraticeTest;
 
 
 export const addAndGetTest=async(userId,subjectId,questions)=>{

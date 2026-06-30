@@ -1,21 +1,27 @@
-export const generateTest = async (req, res) => {
+import Question from "../../models/Question.js";
+
+
+
+
+export const createTest = async (req, res) => {
   try {
 
     const {
       name,
       startAt,
-      endAt
+      endAt,
+      questions_no
     } = req.body;
 
     const questions = await Question.aggregate([
       {
         $sample: {
-          size: 20
+          size: questions_no
         }
       }
     ]);
 
-    const test = await Test.create({
+    const test = await Tes.create({
       name,
       startAt,
       endAt,

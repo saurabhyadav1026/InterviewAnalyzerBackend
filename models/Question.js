@@ -33,6 +33,10 @@ const questionSchema = mongoose.Schema({
 
     about:{
         type: String
+    },
+    mark:{
+        type:Number,
+        default:2
     }
 })
 
