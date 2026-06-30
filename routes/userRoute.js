@@ -8,7 +8,7 @@ const userRoute=express.Router();
 
 
 userRoute.post("/register", registerController);
-userRoute.post("/login", loginUser);
+userRoute.get("/login", loginUser);
 userRoute.get("/logout",logoutUser);
 //userRoute.put("/updateProfile",updateProfie);
 

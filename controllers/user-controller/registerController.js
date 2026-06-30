@@ -3,7 +3,7 @@ import User from "../../models/User.js";
 export const registerController = async (req, res) => {
   try {
     const {
-      rollNo,
+      rollno,
       name,
       branch,
       passingYear,
@@ -13,7 +13,7 @@ export const registerController = async (req, res) => {
 
     // Check if all fields are provided
     if (
-      !rollNo ||
+      !rollno ||
       !name ||
       !branch ||
       !passingYear ||
@@ -28,7 +28,7 @@ export const registerController = async (req, res) => {
 
     // Check if user already exists
     const existingUser = await User.findOne({
-      $or: [{ email }, { rollNo }],
+      $or: [{ email }, { rollno }],
     });
 
     if (existingUser) {
@@ -43,7 +43,7 @@ export const registerController = async (req, res) => {
 
     // Create new user
     const user = await User.create({
-      rollNo,
+      rollno,
       name,
       branch,
       passingYear,
