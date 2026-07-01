@@ -11,7 +11,7 @@ const generateToken = (user) => {
 const loginUser = async (req, res) => {
     console.log("Login attempt initiated");
     try {
-        const { email, password } = req.query;
+        const { email, password } = req.body;
 const identifier =email;
         // Ab 'role' yahan mandatory nahi hai
         if (!identifier || !password) {
@@ -64,7 +64,8 @@ const identifier =email;
                   name:user.name,
                 branch:user.branch,
            passingyear:user.passingyear,
-                 email:user.email
+                 email:user.email,
+                 role:user.role
 
             },
             message: "Login successful"

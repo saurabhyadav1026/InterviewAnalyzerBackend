@@ -11,7 +11,7 @@ userRoute.get("/kk",(req,res)=>{
 })
 
 userRoute.post("/register", registerController);
-userRoute.get("/login", loginUser);
+userRoute.post("/login", loginUser);
 userRoute.get("/logout",logoutUser);
 //userRoute.put("/updateProfile",updateProfie);
 

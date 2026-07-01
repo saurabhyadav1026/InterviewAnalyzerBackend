@@ -40,10 +40,10 @@ app.use('/user',userRoute)
 //app.use("/api/v1", userAuth, v1Route);
 //app.use("/api/admin/v1",adminAuth,v1AdminRoute)
 
-app.use("/student", userAuth, v1Route);
+app.use("/student", userAuth, v1Route); 
 app.use("/admin",adminAuth,v1AdminRoute)
 
-app.get("/verifyme", userAuth,verifyme);
+app.get("/verifyme", userAuth,verifyme)
 
 /* app.get("/addsub",async(req,res)=>{
    const subject= await Subject.create({name:"Web Development"});
