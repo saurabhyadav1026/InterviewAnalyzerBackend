@@ -46,6 +46,11 @@ endAt:{
     default:null
 
   },
+  score:{
+    type:Number,
+    default:null
+
+  },
   aiAnalysis:{
     type:Object,
     default:null

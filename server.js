@@ -23,6 +23,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 
@@ -40,7 +41,7 @@ app.use('/user',userRoute)
 //app.use("/api/v1", userAuth, v1Route);
 //app.use("/api/admin/v1",adminAuth,v1AdminRoute)
 
-app.use("/student", userAuth, v1Route); 
+app.use("/student",userAuth,  v1Route); 
 app.use("/admin",adminAuth,v1AdminRoute)
 
 app.get("/verifyme", userAuth,verifyme)

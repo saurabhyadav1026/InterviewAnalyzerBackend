@@ -27,7 +27,7 @@ const v1AdminRoute =express.Router();
 
 
 v1AdminRoute.get("/generateTest",createTest);
-v1AdminRoute.get("/checkResult",getTestReport);
+v1AdminRoute.get("/checkResult/:testId",getTestReport);
 v1AdminRoute.get("/getConductedTest",getConductedTest);
 
 
