@@ -26,9 +26,15 @@ const questionSchema = mongoose.Schema({
         required: String
     },
 
-    subjectId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Subject'
+    subject: {
+        type:String,
+        enum: ['dsa', 'aptitude', 'programming', 'generalKnowledge'],
+        default: 'dsa'
+    },
+ level: {
+        type:String,
+        enum: ['easy', 'medium', 'hard'],
+        default: 'dsa'
     },
 
     about:{

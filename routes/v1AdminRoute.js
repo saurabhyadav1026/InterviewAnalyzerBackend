@@ -6,7 +6,9 @@ import Subject from "../models/Subject.js";
 import {createTest } from "../controllers/admin-controller/createTest.js";
 import getTestReport from "../controllers/admin-controller/getTestReport.js";
 import getConductedTest from "../controllers/student-controller/getConductedTest.js";
-
+import getQuestionEntryTemplateFile from "../controllers/admin-controller/getQuestionEntryTemplateFile.js";
+import  addQuestionsByExcelFile  from "../controllers/admin-controller/addQuestionsByExcelFile.js";
+import updateQuestion from "../controllers/admin-controller/updateQuestion.js";
 
 
 /* const AddSub= async () => {
@@ -30,6 +32,9 @@ v1AdminRoute.get("/generateTest",createTest);
 v1AdminRoute.get("/checkResult/:testId",getTestReport);
 v1AdminRoute.get("/getConductedTest",getConductedTest);
 
+v1AdminRoute.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
+v1AdminRoute.post("/addQuestionsByExcelFile",addQuestionsByExcelFile)
+v1AdminRoute.put("/updateQuestion/:id",updateQuestion)
 
 
 

@@ -9,11 +9,11 @@ import Test from "../../models/PraticeTest.js"
 const generatePraticeTest=async(req, res)=>{
 
     try{
-      const subjectId=new mongoose.Types.ObjectId(req.query.subjectId)
+      const subject=new mongoose.Types.ObjectId(req.query.subject)
     const questions= await Question.aggregate([
   {
     $match: {
-      subjectId
+     subject
       
     }
   },
@@ -27,7 +27,7 @@ console.log(questions)
 
 
 // take questions id
-const test=await addAndGetTest(req.userId,subjectId,questions.map((doc) =>{ return {question:doc._id}}));
+const test=await addAndGetTest(req.userId,subject,questions.map((doc) =>{ return {question:doc._id}}));
 
 
 res.status(200).send({status:true,test})
