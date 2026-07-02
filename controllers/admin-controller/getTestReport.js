@@ -15,10 +15,11 @@ export const getTestReport = async (req, res) => {
           select: "rollno name branch passingYear email"
         })
         .select(
-          "userId answers correctAnswers status startAt endAt aiAnalysis"
+          "userId answers correctAnswers status startAt endAt passingYear aiAnalysis"
         )
         .lean()
     ]);
+    console.log("Test:", attempts);
 
     if (!test) {
       return res.status(404).json({
@@ -136,7 +137,7 @@ export const getTestReport = async (req, res) => {
         rollno: attempt.userId?.rollno || "-",
         name: attempt.userId?.name || "-",
         branch: attempt.userId?.branch || "-",
-        passingyear: attempt.userId?.passingyear || "-",
+        passingyear: attempt.userId?.passingYear || "-",
         email: attempt.userId?.email || "-",
         total: totalQuestions,
         attempted,

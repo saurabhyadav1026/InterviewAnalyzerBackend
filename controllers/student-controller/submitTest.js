@@ -7,9 +7,7 @@ import Question from "../../models/Question.js";
 
 const submitTest = async (req, res) => {
   try {
-    console.log(req)
-    console.log(req.headders)
-    console.log(req.body)
+   
     const { attemptId, answers } = req.body;
 
     // Check attempt
@@ -58,7 +56,6 @@ const submitTest = async (req, res) => {
         score += question.mark;
       }
     }
-
     // Update attempt
     const updatedAttempt = await AttemptTest.findByIdAndUpdate(
       attemptId,
@@ -73,7 +70,7 @@ const submitTest = async (req, res) => {
           // score
         }
       },
-      { new: true }
+      {returnDocument: "after"  }
     );
 
     return res.status(200).json({

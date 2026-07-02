@@ -9,7 +9,6 @@ const generateToken = (user) => {
 };
 
 const loginUser = async (req, res) => {
-    console.log("Login attempt initiated");
     try {
         const { email, password } = req.body;
 const identifier =email;

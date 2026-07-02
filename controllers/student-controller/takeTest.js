@@ -10,12 +10,14 @@ export const takeTest = async (req, res) => {
   try {
    const testId=req.params.testId;
    let userId = new mongoose.Types.ObjectId(req.userId);  //||"6a434c2a8fc788660ccc763b") ;
-    const t= await AttemptTest.findOne({testId,userId});
-    if(t){
-      res.send({status:false,message:"Test already attempted or ongoing."});
+    let attempt= await AttemptTest.findOne({testId,userId});
+    if(!attempt){
+          attempt=await AttemptTest.create({userId,testId});
+      //res.send({status:false,message:"Test already attempted or ongoing."});
       return;
     }
-    const attempt=await AttemptTest.create({userId,testId});
+
+
     const test = await Test.findById(testId).populate({path:"questions.question",select:"-answer"})
     return res.status(201).json({ 
       status: true, 

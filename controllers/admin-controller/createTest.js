@@ -13,9 +13,11 @@ export const createTest = async (req, res) => {
       name="test1",
       startAt=Date.now(),
       endAt=Date.now(),
-      questions_no=10
+      
     } = req.query;
 
+   const  questions_no = parseInt(req.query.questions_no);
+console.log(typeof questions_no)
     const questions = await Question.aggregate([
       {
         $sample: {
