@@ -141,7 +141,7 @@ export const getTestReport = async (req, res) => {
         branch: attempt.userId?.branch || "-",
         passingyear: attempt.userId?.passingYear || "-",
         email: attempt.userId?.email || "-",
-        status: attempt.status || "-",
+        status: attempt.status=="in_progress"?"Not submitted": attempt.status|| "-",
         total: totalQuestions,
         attempted,
         notAttempted,
