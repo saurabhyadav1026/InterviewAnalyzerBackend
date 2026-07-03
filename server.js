@@ -61,8 +61,8 @@ app.get("/verifyme", userAuth,verifyme)
 
 
 
-app.get("/entry", getQuestionEntryTemplateFile)
-app.post("/addQuestions",uploadExcel.single("file"),addQuestions);
+app.get("/entry", getQuestionEntryTemplateFile);
+// app.post("/addQuestions",uploadExcel.single("file"),addQuestions);
 
 app.listen(process.env.PORT,'0.0.0.0', () => {
     console.log(`Server is running on port `);

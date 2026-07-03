@@ -34,7 +34,7 @@ v1AdminRoute.get("/getConductedTest",getConductedTest);
 
 v1AdminRoute.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
 v1AdminRoute.post("/addQuestionsByExcelFile",addQuestionsByExcelFile)
-v1AdminRoute.put("/updateQuestion/:id",updateQuestion)
+// v1AdminRoute.put("/updateQuestion/:id",updateQuestion)
 
 
 
