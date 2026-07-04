@@ -7,7 +7,7 @@ export const registerController = async (req, res) => {
       name,
       branch,
       passingYear,
-      year,
+      year=1,
       email,
       password,
     } = req.body;
