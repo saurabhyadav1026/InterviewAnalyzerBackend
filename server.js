@@ -16,6 +16,7 @@ import { uploadExcel } from "./middlewares/multer.js";
 import createTestWithQuestions from "./controllers/admin-controller/createTestWithQuestions.js";
 import takeTest from "./controllers/student-controller/takeTest.js";
 import getConductedTest from "./controllers/student-controller/getConductedTest.js";
+import User from "./models/User.js";
 
 
 
@@ -62,6 +63,7 @@ app.get("/verifyme", userAuth,verifyme)
 })
  */
 
+app.get("/getlist",getConductedTest)
 
 
 

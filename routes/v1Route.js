@@ -2,6 +2,7 @@ import express from "express"
 import takeTest from "../controllers/student-controller/takeTest.js";
 import submitTest from "../controllers/student-controller/submitTest.js";
 import getConductedTest from "../controllers/student-controller/getConductedTest.js";
+import { addFeedBack } from "../controllers/feedbackController.js";
 
 //import getSubjectList from "../controllers/student-controller/getSubjectList.js";
 //import generatePraticeTest, { getTest } from "../controllers/student-controller/generatePraticeTest.js";
@@ -15,6 +16,7 @@ const v1Route=express.Router();
 v1Route.get("/getConductedTest",getConductedTest);
 v1Route.get("/getTest/:testId",takeTest);
 v1Route.post("/submitTest",submitTest)
+v1Route.post("/feedback",addFeedBack)
 
 
 
