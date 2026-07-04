@@ -7,6 +7,7 @@ export const registerController = async (req, res) => {
       name,
       branch,
       passingYear,
+      year,
       email,
       password,
     } = req.body;
@@ -17,6 +18,7 @@ export const registerController = async (req, res) => {
       !name ||
       !branch ||
       !passingYear ||
+      !year||
       !email ||
       !password
     ) {
@@ -47,6 +49,7 @@ export const registerController = async (req, res) => {
       name,
       branch,
       passingYear,
+      year,
       email,
       password, // Will be hashed automatically by pre("save")
     });

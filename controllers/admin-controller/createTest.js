@@ -14,7 +14,7 @@ export const createTest = async (req, res) => {
       startAt=Date.now(),
       endAt=Date.now(),
       
-    } = req.query;
+    } = req.body;
 
    const  questions_no = parseInt(req.query.questions_no);
 console.log(typeof questions_no)

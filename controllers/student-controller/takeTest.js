@@ -9,7 +9,8 @@ import Test from "../../models/Test.js";
 export const takeTest = async (req, res) => {
   try {
    const testId=req.params.testId;
-   let userId = new mongoose.Types.ObjectId(req.userId);  //||"6a434c2a8fc788660ccc763b") ;
+ 
+   let userId = new mongoose.Types.ObjectId(req.userId );   ;
     let attempt= await AttemptTest.findOne({testId,userId});
     if(!attempt){
           attempt=await AttemptTest.create({userId,testId});
@@ -17,8 +18,8 @@ export const takeTest = async (req, res) => {
     
     }
 
-
-    const test = await Test.findById(testId).populate({path:"questions.question",select:"-answer"})
+const year = req.year ;
+    const test = await Test.findOne({_id:testId,isActive:true,year:year}).populate({path:"questions.question",select:"-answer"})
     return res.status(201).json({ 
       status: true, 
       test,

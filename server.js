@@ -13,6 +13,10 @@ import verifyme from "./controllers/user-controller/verifyme.js";
 import getQuestionEntryTemplateFile from "./controllers/admin-controller/getQuestionEntryTemplateFile.js";
 import addQuestions from "./controllers/admin-controller/addQuestionsByExcelFile.js";
 import { uploadExcel } from "./middlewares/multer.js";
+import createTestWithQuestions from "./controllers/admin-controller/createTestWithQuestions.js";
+import takeTest from "./controllers/student-controller/takeTest.js";
+import getConductedTest from "./controllers/student-controller/getConductedTest.js";
+
 
 
 const app = express();
@@ -61,8 +65,6 @@ app.get("/verifyme", userAuth,verifyme)
 
 
 
-app.get("/entry", getQuestionEntryTemplateFile);
-// app.post("/addQuestions",uploadExcel.single("file"),addQuestions);
 
 app.listen(process.env.PORT,'0.0.0.0', () => {
     console.log(`Server is running on port `);

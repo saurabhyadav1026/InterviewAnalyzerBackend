@@ -9,6 +9,11 @@ import getConductedTest from "../controllers/student-controller/getConductedTest
 import getQuestionEntryTemplateFile from "../controllers/admin-controller/getQuestionEntryTemplateFile.js";
 import  addQuestionsByExcelFile  from "../controllers/admin-controller/addQuestionsByExcelFile.js";
 import updateQuestion from "../controllers/admin-controller/updateQuestion.js";
+import deActiveTest from "../controllers/admin-controller/deActiveTest.js";
+import changeTestSchedule from "../controllers/admin-controller/changeTestSchedule.js";
+import addQuestionsForTest from "../controllers/admin-controller/addQuestionsForTest.js";
+import { uploadExcel } from "../middlewares/multer.js";
+import createTestWithQuestions from "../controllers/admin-controller/createTestWithQuestions.js";
 
 
 /* const AddSub= async () => {
@@ -28,13 +33,42 @@ const v1AdminRoute =express.Router();
 //  v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
 
 
-v1AdminRoute.get("/generateTest",createTest);
-v1AdminRoute.get("/checkResult/:testId",getTestReport);
-v1AdminRoute.get("/getConductedTest",getConductedTest);
+
+// for test API
+
+//v1AdminRoute.post("/generateTest",createTest);
+
+
 
 v1AdminRoute.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
-v1AdminRoute.post("/addQuestionsByExcelFile",addQuestionsByExcelFile)
-// v1AdminRoute.put("/updateQuestion/:id",updateQuestion)
+v1AdminRoute.post("/generateTest",uploadExcel.single("file"),createTestWithQuestions);
+v1AdminRoute.get("/getConductedTest",getConductedTest);
+v1AdminRoute.get("/checkResult/:testId",getTestReport);
+
+
+
+//v1AdminRoute.put("/deActiveTest/:testId",deActiveTest)
+//v1AdminRoute.put("/changeTestSchedule/:id",changeTestSchedule)
+//v1AdminRoute.put("/updateQuestion/:id",updateQuestion)
+
+//v1AdminRoute.post("/addQuestionsByExcelFile",addQuestionsByExcelFile)
+
+
+
+
+
+
+
+
+
+
+
+
+//for conducting test
+
+
+
+
 
 
 

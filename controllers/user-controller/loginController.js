@@ -46,7 +46,7 @@ const identifier =email;
             });
         }
 
-        const refreshToken = generateToken({ userId: user._id, role: user.role });
+        const refreshToken = generateToken({ userId: user._id, role: user.role ,year:user.year});
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,

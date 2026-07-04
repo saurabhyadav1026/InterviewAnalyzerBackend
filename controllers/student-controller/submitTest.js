@@ -2,6 +2,7 @@
 
 import AttemptTest from "../../models/AttemptTest.js";
 import Question from "../../models/Question.js";
+import Test from "../../models/Test.js";
 
 
 
@@ -9,6 +10,8 @@ const submitTest = async (req, res) => {
   try {
    
     const { attemptId, answers } = req.body;
+
+
 
     // Check attempt
     const attempt = await AttemptTest.findById(attemptId);
@@ -19,6 +22,14 @@ const submitTest = async (req, res) => {
         message: "Attempt not found"
       });
     }
+
+        const test=await Test.findById(attempt.testId);
+        if(test &&(!test.isActive)){
+            return res.status(404).json({
+                success: false,
+                message: "Test is over. You cannot submit answers now."
+              });
+        }
 
     // Get all questions submitted by user
     const questionIds = answers.map(ans => ans.question);

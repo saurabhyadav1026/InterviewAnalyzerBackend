@@ -5,7 +5,7 @@ import Test from "../../models/Test.js";
 const getConductedTest=async(req,res)=>{
 
 try    {
-const tests= await Test.find({},{questions:0});
+const tests= await Test.find({isActive:true,year:req.year},{questions:0});
 
 res.status(200).send({status:true,tests})
 }catch(err){

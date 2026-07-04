@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const questionSchema = mongoose.Schema({
+    testId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Test",
+        default: null
+    }, 
 
     question:{
         type: String,

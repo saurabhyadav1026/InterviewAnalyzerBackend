@@ -7,13 +7,18 @@ const testSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
-
+year:{
+  type:Number,
+  enum:[1,2,3,4],
+  defult:null
+},
     questions: [
     {  question:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question",
-        required: true
-      }}
+        default :null
+      }},
+      
     ],
 
     startAt: {

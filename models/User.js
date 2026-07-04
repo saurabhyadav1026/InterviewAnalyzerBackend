@@ -20,10 +20,15 @@ const userSchema = new mongoose.Schema({
       required: true,
       trim: true,
     },
+    year:{
+      type:Number,
+      enum:[1,2,3,4],
+      required:true
+    },
 
     passingYear: {
       type: Number,
-      required: true,
+     required:true
     },
 
 
