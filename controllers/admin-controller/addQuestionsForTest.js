@@ -94,7 +94,7 @@ export const addQuestionsForTest = async (file,testId,questions_no) => {
             }
         );
 
-        return  insertedQuestions.map((q)=>{ return {question:q._id}}).slice(0,questions_no)    
+        return  (insertedQuestions.map((q)=>{ return {question:q._id}})).slice(0,questions_no)    
 
     } catch (error) {
         console.error(error);
