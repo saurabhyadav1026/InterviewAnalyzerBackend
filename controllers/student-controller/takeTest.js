@@ -21,6 +21,7 @@ export const takeTest = async (req, res) => {
     if(!attempt){
           attempt=await AttemptTest.create({userId,testId});
       //res.send({status:false,message:"Test already attempted or ongoing."});
+      //return;
     
     }
 

@@ -15,7 +15,7 @@ await Feedback.create({
     feedback,
     rating
 });
-res.staus(200).send({status:true,messsage:"feedback sended."})
+res.status(200).send({status:true,messsage:"feedback sended."})
 
    }catch(err){
     console.log(err);
