@@ -12,7 +12,7 @@ export const takeTest = async (req, res) => {
  
 
     const t= await Test.find({_id:testId,isActive:true});
-    if(!test){
+    if(!t){
       res.status(401).send({status:false,message:"test is not available."});
       return;
     }
