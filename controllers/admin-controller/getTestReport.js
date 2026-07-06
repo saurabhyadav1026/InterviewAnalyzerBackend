@@ -19,8 +19,6 @@ export const getTestReport = async (req, res) => {
         )
         .lean()
     ]);
-    console.log("Test:", attempts);
-
     if (!test) {
       return res.status(404).json({
         success: false,

@@ -16,8 +16,6 @@ export const getQuestionEntryTemplateFile = async (req, res) => {
 
 
 
-        console.log("Subjects:", subjects);
-
         if (!subjects || subjects.length === 0) {
             throw new Error("No subject enum values found in schema.");
         }

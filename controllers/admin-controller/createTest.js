@@ -7,7 +7,7 @@ import Test from "../../models/Test.js";
 
 export const createTest = async (req, res) => {
   try {
-    console.log("we will create test")
+  
 
     const {
       name="test1",
@@ -17,7 +17,7 @@ export const createTest = async (req, res) => {
     } = req.body;
 
    const  questions_no = parseInt(req.query.questions_no);
-console.log(typeof questions_no)
+
     const questions = await Question.aggregate([
       {
         $sample: {

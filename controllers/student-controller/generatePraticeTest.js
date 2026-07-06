@@ -22,9 +22,6 @@ const generatePraticeTest=async(req, res)=>{
   }
 ]);
 
-console.log(questions)
-
-
 
 // take questions id
 const test=await addAndGetTest(req.userId,subject,questions.map((doc) =>{ return {question:doc._id}}));
