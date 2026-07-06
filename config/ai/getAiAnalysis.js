@@ -25,17 +25,12 @@ const getAiAnalysis=async(message)=>{
       max_completion_tokens: 500,
     });
 
-    return {
-      status: true,
-      report:JSON.parse(response.choices[0].message.content),
-    };
+    return JSON.parse(response.choices[0].message.content)
+    
   } catch (err) {
     console.error(err);
 
-   return {
-      status: false,
-      error: err.message,
-    };
+   return "Failed to load Ai-Analysis report.";
   }
 }
 

@@ -69,7 +69,9 @@ const submitTest = async (req, res) => {
       }
     }
 
-  const aiAnalysis=await getAiAnalysis(JSON.stringify({questions,answers})) ;
+ let aiAnalysis=await getAiAnalysis(JSON.stringify({questions,answers})) ;
+
+
 
     // Update attempt
     const updatedAttempt = await AttemptTest.findByIdAndUpdate(
