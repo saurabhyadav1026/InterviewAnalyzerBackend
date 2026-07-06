@@ -18,7 +18,8 @@ export const createTestWithQuestions = async (req, res) => {
       name,
       startAt,
       endAt,
-      year
+      year,
+      questions_no
       
     } = req.body;
 
@@ -35,7 +36,7 @@ export const createTestWithQuestions = async (req, res) => {
     });
 
 
- test.questions  =await addQuestionsForTest(req.file,test._id);
+ test.questions  =await addQuestionsForTest(req.file,test._id,questions_no);
  test.save();
 
     res.status(201).json({
@@ -64,3 +65,7 @@ export const createTestWithQuestions = async (req, res) => {
 
 
 export default createTestWithQuestions;
+
+
+
+// deleted testId 6a4c1200d432279e891c69fd

@@ -10,7 +10,7 @@ import Question from "../../models/Question.js";
 
 
 
-export const addQuestionsForTest = async (file,testId) => {
+export const addQuestionsForTest = async (file,testId,questions_no) => {
     try {
         if (!file && !testId) {
             return res.status(400).json({
@@ -94,7 +94,7 @@ export const addQuestionsForTest = async (file,testId) => {
             }
         );
 
-        return  insertedQuestions.map((q)=>{ return {question:q._id}})
+        return  insertedQuestions.map((q)=>{ return {question:q._id}}).slice(0,questions_no)    
 
     } catch (error) {
         console.error(error);

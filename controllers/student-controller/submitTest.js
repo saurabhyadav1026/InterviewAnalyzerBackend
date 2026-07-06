@@ -1,5 +1,6 @@
 
 
+import getAiAnalysis from "../../config/ai/getAiAnalysis.js";
 import AttemptTest from "../../models/AttemptTest.js";
 import Question from "../../models/Question.js";
 import Test from "../../models/Test.js";
@@ -67,11 +68,15 @@ const submitTest = async (req, res) => {
         score += question.mark;
       }
     }
+
+  const aiAnalysis=await getAiAnalysis(JSON.stringify({questions,answers})) ;
+
     // Update attempt
     const updatedAttempt = await AttemptTest.findByIdAndUpdate(
       attemptId,
       {
         $set: {
+          aiAnalysis,
           answers,
           correctAnswers,
           status: "submitted",

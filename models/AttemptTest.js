@@ -52,7 +52,7 @@ endAt:{
 
   },
   aiAnalysis:{
-    type:Object,
+    type:String,
     default:null
   }
   
