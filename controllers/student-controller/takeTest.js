@@ -10,6 +10,12 @@ export const takeTest = async (req, res) => {
   try {
    const testId=req.params.testId;
  
+
+    const t= await Test.find({_id:testId,isActive:true});
+    if(!test){
+      res.status(401).send({status:false,message:"test is not available."});
+      return;
+    }
    let userId = new mongoose.Types.ObjectId(req.userId );   ;
     let attempt= await AttemptTest.findOne({testId,userId});
     if(!attempt){
