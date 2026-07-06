@@ -25,7 +25,7 @@ const getAiAnalysis=async(message)=>{
       max_completion_tokens: 500,
     });
 
-    return JSON.parse(response.choices[0].message.content)
+    return response.choices[0].message.content;
     
   } catch (err) {
     console.error(err);
