@@ -12,6 +12,7 @@ export const addFeedBack=async(req,res)=>{
    }
 
 await Feedback.create({
+   userId:req.userId,
     feedback,
     rating
 });
