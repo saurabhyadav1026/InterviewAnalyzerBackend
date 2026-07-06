@@ -4,7 +4,6 @@ import express from "express";
 import Subject from "../models/Subject.js";
 //import getUsersByDateRange from "../controllers/admin-controller/getUserBydate.js";
 import {createTest } from "../controllers/admin-controller/createTest.js";
-import getTestReport from "../controllers/admin-controller/getTestReport.js";
 import getConductedTest from "../controllers/student-controller/getConductedTest.js";
 import getQuestionEntryTemplateFile from "../controllers/admin-controller/getQuestionEntryTemplateFile.js";
 import  addQuestionsByExcelFile  from "../controllers/admin-controller/addQuestionsByExcelFile.js";
@@ -14,6 +13,7 @@ import changeTestSchedule from "../controllers/admin-controller/changeTestSchedu
 import addQuestionsForTest from "../controllers/admin-controller/addQuestionsForTest.js";
 import { uploadExcel } from "../middlewares/multer.js";
 import createTestWithQuestions from "../controllers/admin-controller/createTestWithQuestions.js";
+import getConductedTests from "../controllers/admin-controller/getConductedTests.js";
 
 
 /* const AddSub= async () => {
@@ -42,7 +42,7 @@ const v1AdminRoute =express.Router();
 
 v1AdminRoute.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
 v1AdminRoute.post("/generateTest",uploadExcel.single("file"),createTestWithQuestions);
-v1AdminRoute.get("/getConductedTest",getConductedTest);
+v1AdminRoute.get("/getConductedTest",getConductedTests);
 v1AdminRoute.get("/checkResult/:testId",getTestReport);
 
 
