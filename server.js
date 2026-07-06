@@ -63,7 +63,10 @@ app.get("/verifyme", userAuth,verifyme)
 })
  */
 
-app.get("/getlist",getConductedTest)
+
+
+app.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
+app.post("/createTest",uploadExcel.single('file'),createTestWithQuestions)
 
 
 

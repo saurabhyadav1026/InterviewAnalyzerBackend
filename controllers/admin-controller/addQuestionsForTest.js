@@ -79,8 +79,7 @@ export const addQuestionsForTest = async (file,testId) => {
                 topic: topic?.toString().trim(),
                 subject: subject?.toString().trim(),
                 about: about?.toString().trim() || "",
-                mark: Number(mark) || 1
-            });
+                mark: Number(mark) || 2            });
         });
 
         if (questionsToInsert.length === 0) {
