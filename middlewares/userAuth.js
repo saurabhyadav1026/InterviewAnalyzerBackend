@@ -28,7 +28,7 @@ const userAuth = async (req, res, next) => {
 
     req.userId = user._id;
     req.role=user.role;
-    re1.year=user.year;
+    if(user.role!=="admin")re1.year=user.year;
 
     next();
 
