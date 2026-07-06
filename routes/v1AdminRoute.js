@@ -14,6 +14,7 @@ import addQuestionsForTest from "../controllers/admin-controller/addQuestionsFor
 import { uploadExcel } from "../middlewares/multer.js";
 import createTestWithQuestions from "../controllers/admin-controller/createTestWithQuestions.js";
 import getConductedTests from "../controllers/admin-controller/getConductedTests.js";
+import getTestReport from "../controllers/admin-controller/getTestReport.js";
 
 
 /* const AddSub= async () => {
