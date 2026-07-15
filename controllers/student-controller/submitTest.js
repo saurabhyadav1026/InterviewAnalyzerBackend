@@ -83,9 +83,7 @@ const submitTest = async (req, res) => {
           correctAnswers,
           status: "submitted",
           endAt: new Date(),
-
-          // save score only if you add this field in schema
-          // score
+          score
         }
       },
       {returnDocument: "after"  }
@@ -94,11 +92,8 @@ const submitTest = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Test submitted successfully",
-      data: {
-        attempt: updatedAttempt,
-        score,
-        correctAnswers
-      }
+      result:  updatedAttempt,
+      
     });
 
   } catch (error) {
