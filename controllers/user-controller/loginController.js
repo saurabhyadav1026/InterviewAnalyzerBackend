@@ -2,8 +2,8 @@ import User from "../../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const generateToken = (user) => {
-    return jwt.sign(user, process.env.JWT_SECRET, {
+export const generateToken = (payloade) => {
+    return jwt.sign(payloade, process.env.JWT_SECRET, {
         expiresIn: "30d"
     });
 };

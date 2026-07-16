@@ -5,7 +5,7 @@ import sendPasswordResetLink from "../../operations/mail/sendPasswordResetLink.j
 
 const generateToken = (user) => {
     return jwt.sign(user, process.env.JWT_SECRET, {
-        expiresIn: "30d"
+        expiresIn: "5m"
     });
 };
 

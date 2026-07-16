@@ -3,22 +3,21 @@ import sender from "../../config/mail/sender.js";
 
 const sendPasswordResetLink =async (user, token)=>{
 
-    console.log("herrere")
+   
 
     try{
-
-console.log(user);
-await sender.sendMail(mail(user,token),(err,info)=>{
+ sender.sendMail(mail(user,token),(err,info)=>{
         if(err){
             console.log("you get error")
             console.log(err);
-            return false;
+         //   return false;
         }
         else{
             console.log(" sent ho gya")
-            return true;
+            //return true;
         }
     })
+    return true;
 
     }catch(err){
 

@@ -16,8 +16,15 @@ userRoute.get("/kk",(req,res)=>{
 userRoute.post("/register", registerController);
 userRoute.post("/login", loginUser);
 userRoute.get("/logout",logoutUser);
-userRoute.get("/resetmypassword",forgetPassword)
-userRoute.post("/secure/resetpassword/:token",resetPassword)
+
+
+userRoute.get("/resetmypassword",forgetPassword)        // send   ?email
+userRoute.post("/secure/resetpassword",resetPassword)   // send in body   {token ,password}
+userRoute.post("/verifyotp",forgetPassword)              //send in body     {otp}
+
+
+
+
 //userRoute.put("/updateProfile",updateProfie);
 
 
