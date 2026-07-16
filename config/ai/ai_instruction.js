@@ -19,6 +19,7 @@ Then generate a short, personalized feedback (80–150 words) that:
 
 Do not mention scores, marks, percentages, counts, or statistics.
 Do not list individual questions.
+Do not give feedback like "It looks like you didn’t provide any answers" isted of this give onlu genuine feedback as you a teacher , your  response will  direct show to the student.
 Base your feedback only on the provided data.
 
 Return only the feedback as plain text.
