@@ -5,15 +5,15 @@ import Feedback from "../models/Feedback.js";
 
 export const addFeedBack=async(req,res)=>{
 
-   try{ const {feedback,rating}=req.body;
+   try{ const {comments,rating}=req.body;
 
-   if(!feedback || !feedback.trim()){
+   if(!comments || !comments.trim()){
    res.status(300).send({status:false,messsage:"No feedback"})
    }
 
 await Feedback.create({
    userId:req.userId,
-    feedback,
+    comments,
     rating
 });
 res.status(200).send({status:true,messsage:"feedback sended."})

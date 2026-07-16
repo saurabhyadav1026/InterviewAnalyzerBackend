@@ -11,7 +11,7 @@ userId:{
     ref:'User',
     required:true
 },
-feedback:{
+comments:{
     type:String,
     required:true
 
