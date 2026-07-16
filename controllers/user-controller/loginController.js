@@ -11,8 +11,8 @@ const generateToken = (user) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        email=email.toLowerCase();
-const identifier =email;
+       
+const identifier =email.toLowerCase();
         // Ab 'role' yahan mandatory nahi hai
         if (!identifier || !password) {
             return res.status(400).json({
