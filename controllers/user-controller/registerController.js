@@ -1,6 +1,7 @@
 import User from "../../models/User.js"; 
 import getAndSaveOtp from "../../operations/getAndSaveOtp.js";
 import sendRegisterUserEmail from "../../operations/mail/sendRegisterUserEmail.js";
+import jwt from "jsonwebtoken";
 
 
 

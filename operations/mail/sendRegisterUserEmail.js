@@ -1,4 +1,4 @@
-
+import sender from "../../config/mail/sender.js";
 
 
 const sendRegisterUserEmail =(email,name,otp)=>{
