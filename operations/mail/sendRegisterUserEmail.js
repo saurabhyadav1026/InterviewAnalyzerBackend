@@ -12,7 +12,9 @@ const sendRegisterUserEmail =(email,name,otp)=>{
             console.log(err);
          //   return false;
         }
-        
+        else{
+            console.log(" hey bro otp is sended "+ email)
+        }
     })
     return true;
 
@@ -34,7 +36,7 @@ export default sendRegisterUserEmail;
 const mail=(email,name , otp)=>{
 
  
-    
+    console.log(" otp will send to "+email)
 
 return {
 
