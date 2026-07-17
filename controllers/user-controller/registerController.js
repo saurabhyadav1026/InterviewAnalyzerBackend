@@ -80,8 +80,8 @@ export const registerController = async (req, res) => {
             sameSite: "None",
             maxAge: 30 * 24 * 60 * 60 * 1000
         });
-
-    sendRegisterUserEmail(user.email,user.name, otp);
+console.log( "hey "+ user.email)
+  await  sendRegisterUserEmail(user.email,user.name, otp);
 
 res.status(200).send({status:true, message:" OTP is send on your register email. It will expire  in 5 minute."})
 

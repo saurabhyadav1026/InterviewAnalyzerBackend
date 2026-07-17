@@ -7,12 +7,14 @@ const sendRegisterUserEmail =(email,name,otp)=>{
 
     try{
  sender.sendMail(mail(email,name, otp),(err,info)=>{
+     console.log(info)
         if(err){
             console.log("you get error")
             console.log(err);
          //   return false;
         }
         else{
+           
             console.log(" hey bro otp is sended "+ email)
         }
     })
