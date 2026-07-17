@@ -17,6 +17,7 @@ import createTestWithQuestions from "./controllers/admin-controller/createTestWi
 import takeTest from "./controllers/student-controller/takeTest.js";
 import getConductedTest from "./controllers/student-controller/getConductedTest.js";
 import User from "./models/User.js";
+import sendRegisterUserEmail from "./operations/mail/sendRegisterUserEmail.js";
 
 
 
@@ -65,11 +66,14 @@ app.get("/verifyme", userAuth,verifyme)
 
 
 
-app.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
-app.post("/createTest",uploadExcel.single('file'),createTestWithQuestions)
 
 
-
+app.get("/testotp",(req,res)=>{
+  const e= "SAURABHYADAV7041916@GMAIL.COM";
+  const o="123"
+  sendRegisterUserEmail(e,o)
+  res.send("otp is sended")
+})
 
 app.listen(process.env.PORT,'0.0.0.0', () => {
     
