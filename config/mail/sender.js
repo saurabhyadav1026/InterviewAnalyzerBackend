@@ -8,7 +8,19 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const sender=nodemailer.createTransport({
-    port:465,
+
+    service: 'gmail',        // 👈 Host ki jagah service: 'gmail' likhein
+  port: 465,               // 👈 Port strictly 465 rakhein
+  secure: true,            // 👈 Yeh true hona chahiye
+  family: 4,               // IPv4 force karein
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS  // 👈 Yeh aapka 16-digit "App Password" hona chahiye
+  },
+  connectionTimeout: 15000, // Timeout limits ko badha dein
+  socketTimeout: 15000
+  
+   /*  port:465,
     host:"smtp.gmail.com",
     //service:'gmail',
      connectionTimeout: 10000, // 10 seconds
@@ -20,7 +32,7 @@ const sender=nodemailer.createTransport({
         user:process.env.MAIL_USER,
         pass:process.env.MAIL_PASS
     },
-    connectionTimeout:10000
+    connectionTimeout:10000 */
 })
 
 
