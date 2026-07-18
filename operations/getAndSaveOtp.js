@@ -9,7 +9,7 @@ const getAndSaveOtp=async(email)=>{
 
 let _otp=crypto.randomInt(100000, 1000000).toString();
 const otp = await bcrypt.hash(_otp, 10);
-
+await Otp.deleteMany({email});
 await Otp.create({
   email: email,
   otp,
