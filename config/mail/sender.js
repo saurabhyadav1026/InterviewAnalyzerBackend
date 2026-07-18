@@ -11,6 +11,9 @@ const sender=nodemailer.createTransport({
     port:465,
     host:"smtp.gmail.com",
     //service:'gmail',
+     connectionTimeout: 10000, // 10 seconds
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
     secure:true,
 
     auth:{
