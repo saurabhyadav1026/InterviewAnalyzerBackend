@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const sender=nodemailer.createTransport({
-    port:587,
+    port:465,
     host:"smtp.gmail.com",
     //service:'gmail',
     secure:true,
