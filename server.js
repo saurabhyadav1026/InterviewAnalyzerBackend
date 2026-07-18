@@ -71,7 +71,7 @@ app.get("/verifyme", userAuth,verifyme)
 app.get("/testotp",(req,res)=>{
   const e= "SAURABHYADAV7041916@GMAIL.COM";
   const o="123"
-  sendRegisterUserEmail(e,o)
+  sendRegisterUserEmail(e,"sbh",o)
   res.send("otp is sended")
 })
 
