@@ -3,7 +3,8 @@ import sender from "../../config/mail/sender.js";
 
 const sendRegisterUserEmail =(email,name,otp)=>{
 
-
+console.log("MAIL_USER:", process.env.MAIL_USER);
+console.log("MAIL_PASS exists:", !!process.env.MAIL_PASS);
 
     try{
  sender.sendMail(mail(email,name, otp),(err,info)=>{
