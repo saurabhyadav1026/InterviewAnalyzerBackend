@@ -13,7 +13,10 @@ if(!token){
     res.status(402).send({status:false,mesage:"there is no google verification token"})
 }
   const ticket= await client.verifyIdToken({idToken:token,audience:process.env.GOOGLE_O_AUTH_CLINT_ID});
-  if(!ticket)return {status:false,msg:"ticket not verified"}
+  if(!ticket){
+    res.status(401).send({status:false,msg:"Failed to verify."})
+    return;
+    }
     const payloade=ticket.getPayload();
     
     

@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 
 const generateToken = (payloade) => {
     return jwt.sign(payloade, process.env.JWT_SECRET, {
-        expiresIn: "5m"
+        expiresIn: "6m"
     });
 };
 
@@ -78,10 +78,10 @@ export const registerController = async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: "None",
-            maxAge: 30 * 24 * 60 * 60 * 1000
+            maxAge: 5 * 60 * 1000
         });
 console.log( "hey "+ user.email)
-  await  sendRegisterUserEmail(user.email,user.name, otp);
+   sendRegisterUserEmail(user.email,user.name, otp);
 
 res.status(200).send({status:true, message:" OTP is send on your register email. It will expire  in 5 minute."})
 
