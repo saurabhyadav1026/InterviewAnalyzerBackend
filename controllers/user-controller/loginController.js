@@ -46,7 +46,25 @@ const identifier =email.toLowerCase();
                 message: "Invalid credentials"
             });
         }
+        return setLoginUser(res,user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: "Server error during login",
+            error: error.message
+        });
+    }
+}
 
+export default loginUser;
+
+
+
+export const setLoginUser=(res,user)=>{
+
+
+    try{
+    
         const refreshToken = generateToken({ userId: user._id, role: user.role ,year:user.year});
 
         res.cookie("refreshToken", refreshToken, {
@@ -71,13 +89,11 @@ const identifier =email.toLowerCase();
             message: "Login successful"
         });
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
+    }catch(err){
+        console.log(err);
+         res.status(500).json({
             message: "Server error during login",
-            error: error.message
+            error: err.message
         });
     }
 }
-
-export default loginUser;

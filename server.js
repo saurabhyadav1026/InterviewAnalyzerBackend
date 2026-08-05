@@ -19,12 +19,6 @@ import getConductedTest from "./controllers/student-controller/getConductedTest.
 import User from "./models/User.js";
 import sendRegisterUserEmail from "./operations/mail/sendRegisterUserEmail.js";
 
-import dns from "node:dns";
-
-dns.lookup("smtp.gmail.com", { all: true }, (err, addresses) => {
-  console.log("DNS Error:", err);
-  console.log("SMTP Addresses:", addresses);
-});
 
 const app = express();
 
