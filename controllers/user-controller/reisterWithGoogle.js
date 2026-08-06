@@ -10,7 +10,7 @@ const client=new OAuth2Client(process.env.GOOGLE_O_AUTH_CLINT_ID);
 const registerWithGoogle=async(req,res)=>{
 const {token}=req.body;
 if(!token){
-    res.status(402).send({status:false,mesage:"there is no google verification token"})
+    return res.status(402).send({status:false,mesage:"there is no google verification token"});
 }
   const ticket= await client.verifyIdToken({idToken:token,audience:process.env.GOOGLE_O_AUTH_CLINT_ID});
   if(!ticket){
@@ -22,8 +22,8 @@ if(!token){
     
     
     
-    let user= await User.findOne({email:payloade.email.toLowerCase()});
-    if(user){
+    let existingUserEmail = await User.findOne({email:payloade.email.toLowerCase()});
+    if(existingUserEmail){
          res.status(401).send({status:false,message:"This gmail is already registered."});
          return;
     }
@@ -57,7 +57,7 @@ if(!token){
 
 
 if(payloade.email.toLowerCase().trim() !==email.toLowerCase().trim()){
-    res.status(401).send({status:false,message:"Email not matched"})
+    return res.status(401).send({status:false,message:"Email not matched"});
 }
     // Check if user already exists
     const existingUser = await User.findOne({rollno });
@@ -69,7 +69,7 @@ if(payloade.email.toLowerCase().trim() !==email.toLowerCase().trim()){
       });
     }
 
-   const user_ = {
+   const user = {
       rollno,
       name,
       branch,
