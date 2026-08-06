@@ -1,1 +1,0 @@
-npm install swagger-ui-express swagger-jsdoc
