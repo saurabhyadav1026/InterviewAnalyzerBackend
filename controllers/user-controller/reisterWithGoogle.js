@@ -8,6 +8,8 @@ import User from '../../models/User.js';
 const client=new OAuth2Client(process.env.GOOGLE_O_AUTH_CLINT_ID);
 
 const registerWithGoogle=async(req,res)=>{
+
+  try{
 const {token}=req.body;
 if(!token){
     return res.status(402).send({status:false,mesage:"there is no google verification token"});
@@ -81,7 +83,11 @@ if(payloade.email.toLowerCase().trim() !==email.toLowerCase().trim()){
     await User.create(user);
 
     res.status(200).send({status:true,message:"User registered successfully."});
-
+  }
+  catch(err){
+    console.log(err);
+        res.status(500).send({status:false,message:"Error :"+ err.message});
+  }
   
 }
 
