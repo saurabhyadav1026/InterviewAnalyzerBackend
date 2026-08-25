@@ -18,6 +18,8 @@ import takeTest from "./controllers/student-controller/takeTest.js";
 import getConductedTest from "./controllers/student-controller/getConductedTest.js";
 import User from "./models/User.js";
 import sendRegisterUserEmail from "./operations/mail/sendRegisterUserEmail.js";
+import studentAnalyticsRoute from "./routes/studentAnalyticsRoute.js";
+import setupSwagger from "./config/swagger.js";
 
 
 const app = express();
@@ -52,7 +54,14 @@ app.use('/user',userRoute)
 app.use("/student",userAuth,  v1Route); 
 app.use("/admin",adminAuth,v1AdminRoute)
 
+// Mount student analytics and coding platform integration routes
+app.use("/api/v1/student", userAuth, studentAnalyticsRoute);
+app.use("/student", userAuth, studentAnalyticsRoute);
+
 app.get("/verifyme", userAuth,verifyme)
+
+// Setup Swagger API Documentation
+setupSwagger(app);
 
 /* app.get("/addsub",async(req,res)=>{
    const subject= await Subject.create({name:"Web Development"});

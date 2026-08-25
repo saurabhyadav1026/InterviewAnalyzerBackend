@@ -50,6 +50,45 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["user", "admin"],
         default: "user"
+    },
+    connectedPlatforms: {
+      leetcode: {
+        username: { type: String, default: "" },
+        connectedAt: { type: Date, default: null },
+        isLocked: { type: Boolean, default: false }
+      },
+      gfg: {
+        username: { type: String, default: "" },
+        connectedAt: { type: Date, default: null },
+        isLocked: { type: Boolean, default: false }
+      },
+      codeforces: {
+        username: { type: String, default: "" },
+        connectedAt: { type: Date, default: null },
+        isLocked: { type: Boolean, default: false }
+      },
+      hackerrank: {
+        username: { type: String, default: "" },
+        connectedAt: { type: Date, default: null },
+        isLocked: { type: Boolean, default: false }
+      },
+      github: {
+        username: { type: String, default: "" },
+        connectedAt: { type: Date, default: null },
+        isLocked: { type: Boolean, default: false }
+      }
+    },
+    totalScore: {
+      type: Number,
+      default: 0
+    },
+    dayStreak: {
+      type: Number,
+      default: 0
+    },
+    lastActiveDate: {
+      type: Date,
+      default: null
     }
   },
   {

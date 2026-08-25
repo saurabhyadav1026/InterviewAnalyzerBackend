@@ -27,23 +27,121 @@ return sub;
  */
 const v1AdminRoute =express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Admin Operations
+ *   description: Administrative operations for test creation, test templates, and reports.
+ */
 
-//  v1AdminRoute.post("/addQuestion",adminMiddleware,addQuestion);
-//  v1AdminRoute.post("/updateQuestion/:id",adminMiddleware,updateQuestion); 
-//  v1AdminRoute.delete("/deleteQuestion/:id",adminMiddleware,deleteQues)
-//  v1AdminRoute.get("/usre/bydate",adminMiddleware,getUsersByDateRange)
-
-
-
-// for test API
-
-//v1AdminRoute.post("/generateTest",createTest);
-
-
-
+/**
+ * @swagger
+ * /admin/getQuestionEntryTemplateFile:
+ *   get:
+ *     summary: Retrieve/download the Excel template file for uploading test questions
+ *     tags: [Admin Operations]
+ *     responses:
+ *       200:
+ *         description: Excel template file download stream
+ *         content:
+ *           application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+ *             schema:
+ *               type: string
+ *               format: binary
+ */
 v1AdminRoute.get("/getQuestionEntryTemplateFile",getQuestionEntryTemplateFile);
+
+/**
+ * @swagger
+ * /admin/generateTest:
+ *   post:
+ *     summary: Upload an Excel sheet containing questions to generate a new test
+ *     tags: [Admin Operations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - file
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *                 description: Excel template file containing the test questions
+ *               name:
+ *                 type: string
+ *                 description: Name of the test
+ *               year:
+ *                 type: integer
+ *                 enum: [1, 2, 3, 4]
+ *                 description: Target year for the test
+ *               startAt:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Scheduled start time
+ *               endAt:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Scheduled end time
+ *               category:
+ *                 type: string
+ *                 enum: [Aptitude, DSA, Web Dev, Problem Solving]
+ *                 description: Test category
+ *               durationMinutes:
+ *                 type: integer
+ *                 description: Duration in minutes
+ *     responses:
+ *       200:
+ *         description: Test generated successfully with questions
+ *       400:
+ *         description: Invalid parameters or formatting errors
+ *       500:
+ *         description: Server error
+ */
 v1AdminRoute.post("/generateTest",uploadExcel.single("file"),createTestWithQuestions);
+
+/**
+ * @swagger
+ * /admin/getConductedTest:
+ *   get:
+ *     summary: Fetch all tests conducted by admins
+ *     tags: [Admin Operations]
+ *     responses:
+ *       200:
+ *         description: Successfully fetched conducted tests list
+ *       500:
+ *         description: Server error
+ */
 v1AdminRoute.get("/getConductedTest",getConductedTests);
+
+/**
+ * @swagger
+ * /admin/checkResult/{testId}:
+ *   get:
+ *     summary: Generate and export an Excel report containing scores and AI evaluations for all participants in a test
+ *     tags: [Admin Operations]
+ *     parameters:
+ *       - in: path
+ *         name: testId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the test to inspect
+ *     responses:
+ *       200:
+ *         description: Participant report Excel sheet download stream
+ *         content:
+ *           application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: Test not found
+ *       500:
+ *         description: Server error
+ */
 v1AdminRoute.get("/checkResult/:testId",getTestReport);
 
 

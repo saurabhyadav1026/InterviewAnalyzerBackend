@@ -35,11 +35,15 @@ endAt:{
   },
 
    answers:[
-    { question:{ type: mongoose.Schema.Types.ObjectId,
-    ref: 'Question',
-    required: true },
-  answer:{type:String,default:null}
-  }
+    { 
+      question: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question',
+        required: true 
+      },
+      answer: { type: String, default: null },
+      isCorrect: { type: Boolean, default: false }
+    }
   ],
   correctAnswers:{
     type:Number,
@@ -54,6 +58,11 @@ endAt:{
   aiAnalysis:{
     type:String,
     default:null
+  },
+  category: {
+    type: String,
+    enum: ['Aptitude', 'DSA', 'Web Dev', 'Problem Solving'],
+    default: 'DSA'
   }
   
 }, { timestamps: true });

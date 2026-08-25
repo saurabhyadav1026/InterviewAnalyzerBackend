@@ -40,6 +40,19 @@ year:{
     isActive: {
       type: Boolean,
       default: true
+    },
+    category: {
+      type: String,
+      enum: ['Aptitude', 'DSA', 'Web Dev', 'Problem Solving'],
+      default: 'DSA'
+    },
+    durationMinutes: {
+      type: Number,
+      default: 0
+    },
+    totalQuestions: {
+      type: Number,
+      default: 0
     }
   },
   {
