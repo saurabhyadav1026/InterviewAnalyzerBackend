@@ -194,4 +194,18 @@ studentAnalyticsRoute.post("/submitTest", submitTest);
  */
 studentAnalyticsRoute.get("/test-history", getTestHistory);
 
+/**
+ * @swagger
+ * /student/getTestHistory:
+ *   get:
+ *     summary: Fetch completed test performance history (accuracy, score, duration)
+ *     tags: [Student Analytics]
+ *     responses:
+ *       200:
+ *         description: Successfully fetched test attempt history
+ *       500:
+ *         description: Server error
+ */
+studentAnalyticsRoute.get("/getTestHistory", getTestHistory);
+
 export default studentAnalyticsRoute;
