@@ -1,33 +1,46 @@
-import sender from "../../config/mail/sender.js";
+
+import dotenv from 'dotenv'
+import resend from './sender.js'
+import User from '../../models/User.js'
+
+dotenv.config()
+
+const sendRegisterUserEmail=async(user_mail,name,OTP)=>{
+
+ const  checkuniqEmail=await User.find({email:user_mail.toLowerCase()}).collation({locale:'en',strength:2})
+
+  if(checkuniqEmail.length>0){
+    return {status:false,message:' account email id already exist'};
+  }
+ 
 
 
-const sendRegisterUserEmail =(email,name,otp)=>{
+const otp_mail={
 
-console.log("MAIL_USER:", process.env.MAIL_USER);
-console.log("MAIL_PASS exists:", !!process.env.MAIL_PASS);
-
-    try{
- sender.sendMail(mail(email,name, otp),(err,info)=>{
-     console.log(" your otp is "+otp)
-        if(err){
-            console.log("you get error")
-            console.log(err);
-         //   return false;
-        }
-        else{
-           
-            console.log(" hey bro otp is sended "+ email)
-        }
-    })
-    return true;
-
-    }catch(err){
-
-        console.log(err);
-        return false;
-    }
+    from:"Matrices <noreply@sbhtechhub.matrices.me>",
+    to:user_mail,
+    subject:"OTP VERIFICATION from AbhyasAI",
+    html:"<h5> Your otp   is: </h5><h1>  "+OTP+"</h1> </br></br> <h4>Thankyou</h4> "
 
 }
+
+
+
+return new Promise(async (resolve) => {
+  try {
+    await resend.emails.send(otp_mail);
+
+    resolve({ status: true });
+  } catch (err) {
+    console.error(err);
+    resolve({
+      status: false,
+      message: "Check your email address or try again later.",
+    });
+  }
+});
+}
+
 
 export default sendRegisterUserEmail;
 
@@ -36,35 +49,8 @@ export default sendRegisterUserEmail;
 
 
 
-const mail=(email,name , otp)=>{
 
- 
-    console.log(" otp will send to "+email)
-
-return {
-
-    from:process.env.MAIL_USER,
-    to:email,
-    subject:"OTP Verification  :    AbhyasAI",
-    html:`<div>
-    
-    <h2>Hello! ${name}</h2>
-    <pre>
-    You have reqested to register in <b style="color:blue;">AbhyasAI</b> </b> 
-    </pre>
-<p> Your OTP is :<p>
-<div style="height:50px; padding:5px; color:blue"> <b>${otp}</b> </div>
-    
-  <p>The Otp will expire within 5 minute. </p>
-
-    </div>
-    `
-
-
-
-
-    
-}
-
-
+ export  const createOtpCode=()=>{
+ let otp_code=Math.floor(Math.random()*99999);
+    return otp_code;
 }

@@ -26,7 +26,7 @@ else{
    
 
     const token=generateToken({email:user.email,userId:user._id})
-const isSent =  await sendPasswordResetLink(user, token)
+const isSent =  await sendPasswordResetLink(token,{name:user.name},user.email)
     if(isSent){
         console.log("true hai")
  res.status(200).send({status:true, message:"password reset link is sent on your email."});

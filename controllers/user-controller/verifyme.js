@@ -4,7 +4,7 @@ import User from "../../models/User.js";
 const verifyme=(req,res)=>{
 try{
     
-    const user =User.findById(req.userId);
+    const user =User.findById(req.userId).lean();
 
     res.status(200).json({
             status: true,
