@@ -6,8 +6,9 @@ import User from '../../models/User.js'
 dotenv.config()
 
 const sendRegisterUserEmail=async(user_mail,name,OTP)=>{
+    console.log(" we going to send otp")
 
- const  checkuniqEmail=await User.find({email:user_mail.toLowerCase()}).collation({locale:'en',strength:2})
+ const  checkuniqEmail=await User.findOne({email:user_mail.toLowerCase()})
 
   if(checkuniqEmail.length>0){
     return {status:false,message:' account email id already exist'};
@@ -17,10 +18,10 @@ const sendRegisterUserEmail=async(user_mail,name,OTP)=>{
 
 const otp_mail={
 
-    from:"Matrices <noreply@sbhtechhub.matrices.me>",
+    from:"AbhyasAI <noreply@sbhtechhub.matrices.me>",
     to:user_mail,
     subject:"OTP VERIFICATION from AbhyasAI",
-    html:"<h5> Your otp   is: </h5><h1>  "+OTP+"</h1> </br></br> <h4>Thankyou</h4> "
+    html:"<h5> Your otp   is: </h5><h1>  "+OTP+"</h1> </br></br> <h4>Thankyou "+name+"</h4> "
 
 }
 

@@ -38,7 +38,7 @@ const mail=(token,user_info,emailId)=>{
 
 return {
 
-    from:"Matrices <noreply@sbhtechhub.matrices.me>",
+    from:"AbhyasAI<noreply@sbhtechhub.matrices.me>",
     to:emailId,
     subject:"Forget Password :    AbhyasAI",
     html:`<div>

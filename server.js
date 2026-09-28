@@ -60,6 +60,9 @@ app.use("/student", userAuth, studentAnalyticsRoute);
 
 app.get("/verifyme", userAuth,verifyme)
 
+
+
+
 // Setup Swagger API Documentation
 setupSwagger(app);
 
@@ -76,11 +79,15 @@ setupSwagger(app);
 
 
 
-app.get("/testotp",(req,res)=>{
-  const e= "SAURABHYADAV7041916@GMAIL.COM";
+app.get("/testotp",async(req,res)=>{
+ try{ const e= "SAURABHYADAV7041916@GMAIL.COM";
   const o="123"
-  sendRegisterUserEmail(e,"sbh",o)
-  res.send("otp is sended")
+ if(await sendRegisterUserEmail(e,"sbh",o)) return res.status(200).send({status:true})
+  return res.send({status:false})
+}catch(error){
+  console.error(error);
+  res.status(500).send({status:false,message:error.message})
+}
 })
 
 app.listen(process.env.PORT,'0.0.0.0', () => {
